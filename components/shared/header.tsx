@@ -241,7 +241,7 @@ function DesktopHeader({
   );
 
   return (
-    <header className='max-w-6xl mx-auto flex justify-between items-center py-6 px-4'>
+    <header className='max-w-7xl mx-auto flex justify-between items-center py-6 px-4'>
       <Link href='/'>{logo}</Link>
 
       <div className='flex gap-4'>

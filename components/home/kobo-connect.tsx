@@ -12,14 +12,14 @@ export default function KoboConnect({ data }: KoboConnectProps) {
   const koboConnectData = data!;
   return (
     <div>
-      <div className=' mx-auto py-10 md:py-20 px-4 max-w-6xl'>
+      <div className=' mx-auto py-10 md:py-20 px-4 max-w-7xl'>
         <div>
           <h2 className='text-[#009A74] font-medium text-xl mb-2'>
             {koboConnectData.subtitle}
           </h2>
           <div className='text-2xl lg:text-3xl font-semibold leading-[1.25] max-w-lg'>
             {koboConnectData.mainTitle &&
-            Array.isArray(koboConnectData.mainTitle) ? (
+              Array.isArray(koboConnectData.mainTitle) ? (
               <PortableText
                 value={koboConnectData.mainTitle}
                 components={{

@@ -10,20 +10,20 @@ interface TestimonialCauroselProps {
     comment: string;
     rating: number;
     image:
-      | string
-      | {
-          asset: {
-            _id: string;
-            url: string;
-            metadata: {
-              dimensions: {
-                width: number;
-                height: number;
-              };
-            };
+    | string
+    | {
+      asset: {
+        _id: string;
+        url: string;
+        metadata: {
+          dimensions: {
+            width: number;
+            height: number;
           };
-          alt: string;
         };
+      };
+      alt: string;
+    };
   }>;
 }
 
@@ -58,6 +58,7 @@ function TestimonialCaurosel({ testimonials }: TestimonialCauroselProps) {
       slideSize='70%'
       slideGap='lg'
       withControls
+
       styles={{
         control: {
           zIndex: 2,
@@ -66,6 +67,7 @@ function TestimonialCaurosel({ testimonials }: TestimonialCauroselProps) {
         },
       }}
       emblaOptions={{
+        loop: true,
         dragFree: false,
         align: "center",
       }}>

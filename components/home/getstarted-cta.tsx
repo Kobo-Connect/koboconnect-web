@@ -18,7 +18,7 @@ async function GetStartedCta({ data }: GetStartedCtaProps) {
   }
   return (
     <div>
-      <div className='container flex flex-col items-center justify-center mx-auto py-10 md:py-20 px-4 max-w-6xl text-center'>
+      <div className='container flex flex-col items-center justify-center mx-auto py-10 md:py-20 px-4 max-w-7xl text-center'>
         <div className='space-y-4 '>
           <h2 className='text-2xl md:text-4xl max-w-2xl font-semibold leading-[1.25]'>
             {ctaData.title}

@@ -11,7 +11,7 @@ async function Testimonials() {
   }
 
   return (
-    <div className='relative container max-w-6xl mx-auto'>
+    <div className='relative container max-w-7xl mx-auto'>
       <div className='  py-10 md:py-20 lg:py-28 px-4 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 items-baseline'>
         <div className='space-y-4 md:col-span-1 justify-center'>
           <h2 className='text-2xl md:text-4xl font-semibold leading-[1.25]'>

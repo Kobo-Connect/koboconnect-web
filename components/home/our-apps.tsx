@@ -13,7 +13,7 @@ async function OurApps() {
 
   return (
     <div className='bg-[#0A1B1B] '>
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto pt-10 md:pt-24 lg:pt-28 px-4'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl mx-auto pt-10 md:pt-24 lg:pt-28 px-4'>
         <div className='space-y-6 md:space-y-8 pb-6 lg:pb-16 max-w-lg'>
           <div className='space-y-2'>
             <h3 className='text-[#009A74] font-medium text-xl '>

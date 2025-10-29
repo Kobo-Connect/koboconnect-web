@@ -124,7 +124,7 @@ async function Footer({ data }: FooterProps) {
 
   return (
     <div className='bg-[#0A1B1B]'>
-      <div className='max-w-6xl mx-auto pt-8 md:pt-14 px-4 relative'>
+      <div className='max-w-7xl mx-auto pt-8 md:pt-14 px-4 relative'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 mb-8 md:mb-16'>
           <div className='flex flex-col gap-4 '>
             <Image

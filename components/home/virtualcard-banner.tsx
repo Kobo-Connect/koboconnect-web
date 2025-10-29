@@ -12,7 +12,7 @@ async function VirtualCardBanner() {
 
   return (
     <div className='py-4 md:py-12 px-4'>
-      <div className='max-w-6xl px-4 relative mx-auto bg-[#0A1B1B] rounded-4xl grid grid-cols-1  md:grid-cols-2 flex-col-reverse gap-4 items-center'>
+      <div className='max-w-7xl px-4 relative mx-auto bg-[#0A1B1B] rounded-4xl grid grid-cols-1  md:grid-cols-2 flex-col-reverse gap-4 items-center'>
         <div className='col-span-1 order-2 md:order-1 relative h-full  min-h-[400px]'>
           <Image
             className='absolute top-[-60px] md:top-[-100px] lg:top-[-150px] z-20'

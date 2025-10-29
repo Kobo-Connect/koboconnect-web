@@ -20,7 +20,7 @@ async function InnovativeApproach({ data }: InnovativeApproachProps) {
   }
   return (
     <div>
-      <div className='container mx-auto py-10 md:py-20 lg:py-28 px-4 max-w-6xl'>
+      <div className='container mx-auto py-10 md:py-20 lg:py-28 px-4 max-w-7xl'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-center'>
           <div>
             <h2 className='text-2xl md:text-4xl max-w-lg font-semibold leading-[1.25]'>
