@@ -72,6 +72,9 @@ export const metadata: Metadata = {
   },
 };
 
+// revalidate cache every 60 minutes
+export const revalidate = 3600;
+
 export default async function RootLayout({
   children,
 }: Readonly<{

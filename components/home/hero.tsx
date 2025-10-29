@@ -48,8 +48,8 @@ export default function Hero({ data }: HeroProps) {
         fill
         className='object-cover absolute inset-0 z-0'
       />
-      <div className='max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center py-4 md:pb-10 lg:pb-12 px-4 relative z-10'>
-        <div className='col-span-2 max-w-2xl  py-6 text-white'>
+      <div className='max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center py-4 md:pb-10 lg:pb-14 px-4 relative z-10'>
+        <div className='col-span-2 max-w-2xl  py-6 lg:pb-10 text-white'>
           <div className=''>
             <h1 className='text-2xl md:text-5xl font-bold leading-[1.25]'>
               {heroData.mainTitle} {""}

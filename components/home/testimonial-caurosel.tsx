@@ -58,17 +58,20 @@ function TestimonialCaurosel({ testimonials }: TestimonialCauroselProps) {
       slideSize='70%'
       slideGap='lg'
       withControls
-
       styles={{
         control: {
           zIndex: 2,
           marginRight: -30,
           marginLeft: -25,
+          "[data-inactive]": {
+            opacity: 0,
+            cursor: "default",
+          },
         },
       }}
       emblaOptions={{
         loop: true,
-        dragFree: false,
+        dragFree: true,
         align: "center",
       }}>
       {displayTestimonials.map((testimonial, index) => (
