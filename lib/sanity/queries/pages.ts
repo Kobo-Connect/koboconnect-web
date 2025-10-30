@@ -201,3 +201,15 @@ export const HOME_PAGE_QUERY = defineQuery(`
     }
   }
 `);
+
+export const CONTACT_US_PAGE_QUERY = defineQuery(`
+  *[_type == "contactUsPage"][0] {
+     _id,
+     title,
+     slug,
+     heroSection,
+     mapImage,
+     contactOptions,
+     seo
+  }
+`);
