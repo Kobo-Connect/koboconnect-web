@@ -41,7 +41,7 @@ export default function Hero({ data }: HeroProps) {
     playStoreLink: "#",
   };
   return (
-    <div className='relative h-full'>
+    <div className='relative h-full md:h-[calc(100vh-120px)]'>
       <Image
         src={heroData.backgroundImage.asset.url}
         priority
@@ -49,7 +49,7 @@ export default function Hero({ data }: HeroProps) {
         fill
         className='object-cover absolute inset-0 z-0'
       />
-      <div className='max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-2 gap-8 lg:gap-14 items-stretch py-4 md:pb-10 lg:pb-14 px-4 relative z-10'>
+      <div className='max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-2 gap-8 lg:gap-14 items-stretch py-4 md:py-6 lg:py-8 px-4 relative z-10'>
         <div className='col-span-2 lg:col-span-1 max-w-2xl  py-6 lg:py-10 text-white '>
           <div className=''>
             <h1 className='text-2xl md:text-5xl font-bold leading-[1.25]'>
@@ -104,7 +104,7 @@ export default function Hero({ data }: HeroProps) {
             </Link>
           </div>
         </div>
-        <div className='col-span-1 lg:col-span-1 place-items-center py-4'>
+        <div className='col-span-1 lg:col-span-1 lg:place-items-end py-4'>
           <Image
             src={urlFor(heroData.heroImage.asset).url()}
             alt={heroData.heroImage.alt}
