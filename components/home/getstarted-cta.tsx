@@ -24,9 +24,9 @@ async function GetStartedCta({ data }: GetStartedCtaProps) {
             {ctaData.title}
           </h2>
 
-          <div className='flex items-center justify-center'>
+          <div className='flex items-center justify-center py-2 text-[#010101]'>
             <div className='flex items-center gap-2 text-lg font-medium'>
-              {ctaData.ratingText} <Rating value={ctaData.ratingValue} />{" "}
+              {ctaData.ratingText} <Rating value={ctaData.ratingValue} readOnly />{" "}
               {ctaData.ratingDescription}
             </div>
           </div>
@@ -58,7 +58,7 @@ async function GetStartedCta({ data }: GetStartedCtaProps) {
               />
             </svg>
 
-            <p className='text-lg font-medium'>{ctaData.footerText}</p>
+            <p className='text-lg font-semibold text-[#010101]'>{ctaData.footerText}</p>
           </div>
         </div>
       </div>

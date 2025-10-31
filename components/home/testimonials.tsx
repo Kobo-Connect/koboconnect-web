@@ -13,7 +13,7 @@ async function Testimonials() {
   return (
     <div className='relative container max-w-7xl mx-auto'>
       <div className='  py-10 md:py-20 lg:py-28 px-4 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 items-baseline'>
-        <div className='space-y-4 md:col-span-1 justify-center'>
+        <div className='space-y-4 md:col-span-1 justify-center pb-4 lg:pb-10 '>
           <h2 className='text-2xl md:text-4xl font-semibold leading-[1.25]'>
             {testimonialsData.title}
           </h2>
@@ -44,7 +44,7 @@ async function Testimonials() {
       </div>
 
       <svg
-        className='absolute right-0 inset-y-0 '
+        className='absolute right-0 bottom-0'
         width='425'
         height='100%'
         viewBox='0 0 425 417'

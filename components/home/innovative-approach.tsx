@@ -41,7 +41,7 @@ async function InnovativeApproach({ data }: InnovativeApproachProps) {
           </div>
 
           <div>
-            <p>{innovativeData.description}</p>
+            <p className="text-[#363E3F] font-[400] text-lg">{innovativeData.description}</p>
           </div>
         </div>
       </div>

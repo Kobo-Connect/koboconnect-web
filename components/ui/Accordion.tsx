@@ -9,22 +9,23 @@ interface AccordionItem {
 }
 
 function CustomAccordion({ items }: { items: AccordionItem[] }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [value, setValue] = useState<string | null>(null);
+
   return (
     <Accordion
-      onChange={() => setIsOpen(!isOpen)}
+      value={value}
+      onChange={setValue}
       styles={{
-        content: { backgroundColor: "white" },
-        label: { color: "#010101", fontWeight: 500 },
+        content: { backgroundColor: "white", fontSize: 16, color: "#363E3F" },
+        label: { color: "#010101", fontWeight: 500, fontSize: 18 },
       }}
-      chevronIconSize={12}
-      chevron={isOpen ? <IconMinus size={18} /> : <IconPlus size={18} />}>
+    >
       {items.map((item) => (
         <Accordion.Item key={item.question} value={item.question}>
-          <Accordion.Control className='text-left'>
+          <Accordion.Control chevron={value === item.question ? <IconMinus size={18} /> : <IconPlus size={18} />}>
             {item.question}
           </Accordion.Control>
-          <Accordion.Panel className='text-[#363E3F]'>
+          <Accordion.Panel>
             <p className='mb-2'>{item.answer}</p>
           </Accordion.Panel>
         </Accordion.Item>

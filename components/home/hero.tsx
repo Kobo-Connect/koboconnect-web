@@ -6,6 +6,7 @@ import TypewriterText from "../shared/typewriter-text";
 import heroBg from "@/assets/images/heroBg.png";
 import Link from "next/link";
 import { HomePageData } from "@/lib/sanity/queries/home";
+import { urlFor } from "@/lib/sanity/image";
 
 interface HeroProps {
   data?: HomePageData["heroSection"];
@@ -48,8 +49,8 @@ export default function Hero({ data }: HeroProps) {
         fill
         className='object-cover absolute inset-0 z-0'
       />
-      <div className='max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center py-4 md:pb-10 lg:pb-14 px-4 relative z-10'>
-        <div className='col-span-2 max-w-2xl  py-6 lg:pb-10 text-white'>
+      <div className='max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-2 gap-8 lg:gap-14 items-stretch py-4 md:pb-10 lg:pb-14 px-4 relative z-10'>
+        <div className='col-span-2 lg:col-span-1 max-w-2xl  py-6 lg:py-10 text-white '>
           <div className=''>
             <h1 className='text-2xl md:text-5xl font-bold leading-[1.25]'>
               {heroData.mainTitle} {""}
@@ -59,7 +60,7 @@ export default function Hero({ data }: HeroProps) {
               <br /> {heroData.afterTypewriterText} <br />
             </h1>
 
-            <h1 className='relative text-2xl md:text-5xl font-bold leading-[1.25]'>
+            <h1 className='relative text-2xl md:text-5xl font-bold leading-[1.40]'>
               <span className='relative'>
                 {heroData.appName}
                 <svg
@@ -77,7 +78,7 @@ export default function Hero({ data }: HeroProps) {
               </span>
             </h1>
 
-            <p className='text-[#B5BBBB] my-6 text-base md:text-[22px] leading-loose md:leading-[40px]'>
+            <p className='text-[#B5BBBB] my-6 text-base md:text-[22px] md:leading-[40px] pr-4 max-w-xl'>
               {heroData.description}
             </p>
           </div>
@@ -103,13 +104,15 @@ export default function Hero({ data }: HeroProps) {
             </Link>
           </div>
         </div>
-        <div className='col-span-1'>
+        <div className='col-span-1 lg:col-span-1 place-items-center py-4'>
           <Image
-            src={heroData.heroImage.asset.url}
+            src={urlFor(heroData.heroImage.asset).url()}
             alt={heroData.heroImage.alt}
-            width={672}
-            height={822}
+            width={480}
+            height={420}
             priority
+            className='object-contain'
+            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
           />
         </div>
       </div>

@@ -59,11 +59,15 @@ function TestimonialCaurosel({ testimonials }: TestimonialCauroselProps) {
       slideGap='lg'
       withControls
       styles={{
+        root: {
+          paddingLeft: 10,
+          paddingRight: 20,
+        },
         control: {
           zIndex: 2,
           marginRight: -30,
           marginLeft: -25,
-          "[data-inactive]": {
+          "dataInactive": {
             opacity: 0,
             cursor: "default",
           },
@@ -72,7 +76,7 @@ function TestimonialCaurosel({ testimonials }: TestimonialCauroselProps) {
       emblaOptions={{
         loop: true,
         dragFree: true,
-        align: "center",
+        align: "start",
       }}>
       {displayTestimonials.map((testimonial, index) => (
         <Carousel.Slide key={`${testimonial.name}-${index}`} className='py-4'>

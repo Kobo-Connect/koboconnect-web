@@ -17,7 +17,7 @@ export default function KoboConnect({ data }: KoboConnectProps) {
           <h2 className='text-[#009A74] font-medium text-xl mb-2'>
             {koboConnectData.subtitle}
           </h2>
-          <div className='text-2xl lg:text-3xl font-semibold leading-[1.25] max-w-lg'>
+          <div className='text-2xl lg:text-3xl font-semibold leading-[1.25] max-w-lg text-[#363E3F]'>
             {koboConnectData.mainTitle &&
               Array.isArray(koboConnectData.mainTitle) ? (
               <PortableText

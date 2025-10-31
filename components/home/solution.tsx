@@ -36,7 +36,7 @@ function Solution({ data }: SolutionProps) {
         <h2 className='text-[#010101] font-semibold text-4xl mb-2'>
           {solutionData.title}
         </h2>
-        <p className='text-base font-medium'>{solutionData.subtitle}</p>
+        <p className='text-base font-medium text-[#363E3F]'>{solutionData.subtitle}</p>
       </div>
       <div className='grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-x-8 lg:gap-x-16'>
         {solutionData.solutions.map((solution) => (
@@ -73,8 +73,8 @@ function Solution({ data }: SolutionProps) {
               />
             </svg>
 
-            <h3 className='text-lg font-semibold'>{solution.title}</h3>
-            <p className='text-base font-[400]'>{solution.description}</p>
+            <h3 className='text-lg font-semibold text-[#010101]'>{solution.title}</h3>
+            <p className='text-base font-[400] text-[#363E3F]'>{solution.description}</p>
           </div>
         ))}
       </div>
