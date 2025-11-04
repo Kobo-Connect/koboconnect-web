@@ -4,8 +4,17 @@ import { Carousel } from "@mantine/carousel";
 import TestimonialCard from "./testimonial-card";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 
-function TestimonialCaurosel() {
-  const testimonials = [
+export type TestimonialItem = {
+  name: string;
+  title: string;
+  comment: string;
+  rating: number;
+  image?: { asset?: { url?: string } } | string;
+  id?: string | number;
+};
+
+function TestimonialCaurosel({ testimonials }: { testimonials: TestimonialItem[] }) {
+  const items = testimonials && testimonials.length > 0 ? testimonials : [
     {
       id: 1,
       name: "John Doe",
@@ -13,28 +22,7 @@ function TestimonialCaurosel() {
       rating: 4,
       title: "Product Designer",
       comment:
-        `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-Nulla vehicula ac ex ac vehicula. Vestibulum finibus ante
-sit amet cursus tempus.  Ipsum dolor sit amet,
-consectetur adip`,
-    },
-    {
-      id: 2,
-      name: "Lucky Ekezie",
-      image: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg",
-      rating: 4,
-      title: "Product Designer, Kobo Connect",
-      comment:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget leo a facilisis finibus scelerisque. In et venenatis leo, non luctus mau. Maecenas efficitur volutpat nibh, a aliquet elit.",
-    },
-    {
-      id: 3,
-      name: "Lucky Ekezie",
-      image: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg",
-      rating: 4,
-      title: "Product Designer, Kobo Connect",
-      comment:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget leo a facilisis finibus scelerisque. In et venenatis leo, non luctus mau. Maecenas efficitur volutpat nibh, a aliquet elit.",
+        `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vehicula ac ex ac vehicula. Vestibulum finibus ante sit amet cursus tempus.`,
     },
   ];
 
@@ -63,7 +51,7 @@ consectetur adip`,
         dragFree: false,
         align: "center",
       }}>
-      {testimonials.map((testimonial) => (
+      {items.map((testimonial) => (
         <Carousel.Slide key={testimonial.id} className='py-4'>
           <TestimonialCard testimonial={testimonial} />
         </Carousel.Slide>
