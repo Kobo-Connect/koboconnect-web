@@ -8,6 +8,13 @@ import appStoreSvg from "@/assets/appStore.svg";
 import playStoreSvg from "@/assets/playStore.svg";
 import TypewriterText from "../shared/typewriter-text";
 import heroBg from "@/assets/images/heroBg.png";
+import Link from "next/link";
+import { HomePageData } from "@/lib/sanity/queries/home";
+import { urlFor } from "@/lib/sanity/image";
+
+interface HeroProps {
+  data?: HomePageData["heroSection"];
+}
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -27,83 +34,81 @@ const fadeUp: Variants = {
   },
 };
 
-export default function Hero() {
+export default function Hero({ data }: HeroProps) {
+  // Fallback data if no Sanity data is provided
+  const heroData = data || {
+    backgroundImage: {
+      asset: {
+        url: heroBg.src,
+        _id: "",
+        metadata: { dimensions: { width: 0, height: 0 } },
+      },
+      alt: "Hero background",
+    },
+    mainTitle: "Experience",
+    typewriterWords: ["Banking", "Shopping", "Sending Money"],
+    appName: "Kobo App",
+    afterTypewriterText: "Like Never Before with",
+    description:
+      "Kobo Connect combines payments, transport, chat, food, shopping, and healthcare into a single seamless platform built for modern living. It's not just an app, it's your daily companion.",
+    heroImage: {
+      asset: {
+        url: heroImg.src,
+        _id: "",
+        metadata: { dimensions: { width: 0, height: 0 } },
+      },
+      alt: "Hero image",
+    },
+    appStoreLink: "#",
+    playStoreLink: "#",
+  };
+
   return (
-    <section className="relative h-[75dvh] min-h-[600px] overflow-hidden">
-      {/* Background - render immediately without animation */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src={heroBg}
-          priority
-          alt="hero-bg"
-          fill
-          sizes="100vw"
-          quality={90}
-          className="absolute inset-0 object-cover"
-        />
-      </div>
-
-      <motion.div
-        variants={wrap}
+    <section className="relative h-full md:h-[calc(100vh-80px)]">
+      <Image
+        src={urlFor(heroData.backgroundImage.asset).url()}
+        priority
+        alt='hero-bg'
+        fill
+        className='object-cover absolute inset-0 z-0'
+      />
+      <motion.div variants={wrap}
         initial="hidden"
-        animate="show"
-        className="relative z-10 mx-auto grid h-full max-w-6xl grid-cols-1 gap-8 px-4 py-4 md:grid-cols-3 md:py-6"
-        style={{
-          contentVisibility: "auto", // Optimize rendering
-          containIntrinsicSize: "0 600px", // Reserve space
-        }}
-      >
-        {/* Left copy */}
-        <div className="col-span-2 flex max-w-2xl flex-col justify-center text-white">
-          <motion.h1
-            variants={fadeUp}
-            className="text-2xl font-bold leading-[1.25] md:text-5xl"
-            style={{ minHeight: "1.25em" }} // Reserve vertical space
-          >
-            Experience{" "}
-            <span className="text-[#007F5F]">
-              <TypewriterText
-                words={["Banking", "Shopping", "Sending Money"]}
-              />
-            </span>
-            <br /> Like Never Before with <br />
-          </motion.h1>
-
-          <motion.h1
-            variants={fadeUp}
-            className="relative text-2xl font-bold leading-[1.25] md:text-5xl"
-          >
-            <span className="relative inline-block">
-              Kobo App
-              {/* animated underline */}
-              <svg
-                className="pointer-events-none absolute bottom-0 left-2 w-20 md:w-40"
-                height="60"
-                viewBox="0 0 278 82"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{
-                  position: "absolute",
-                  willChange: "auto", // Prevent GPU layer promotion shifts
-                }}
-              >
-                <motion.path
-                  d="M225.325 16.0525C206.359 9.83672 146.22 2.40419 57.3937 22.4006C-31.4322 42.397 6.15813 64.8532 36.0565 73.5818C68.4575 79.7976 151.594 86.5953 221.769 67.2337C252.195 60.6212 302.297 41.1275 259.307 16.0525C249.429 10.7624 214.736 0.578977 154.992 2.16599"
-                  stroke="#007F5F"
-                  strokeWidth="4"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={{ pathLength: 1, opacity: 1 }}
-                  transition={{ duration: 1, ease: EASE, delay: 0.5 }}
+        animate="show" className='max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between gap-4 py-4 md:py-6 px-4 relative z-10'>
+        <div className='py-10 text-white max-w-2xl'>
+          <div className="">
+            <h1 className='text-2xl md:text-3xl lg:text-5xl font-bold leading-[1.25]'>
+              {heroData.mainTitle} {""}
+              <span className='text-[#007F5F]'>
+                <TypewriterText
+                  words={heroData.typewriterWords}
                 />
-              </svg>
-            </span>
-          </motion.h1>
+              </span>
+              <br /> {heroData.afterTypewriterText} <br />
+            </h1>
 
-          <motion.p variants={fadeUp} className="my-6 text-sm md:text-base">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-            vehicula ac ex ac vehicula. Vestibulum finibus ante sit amet cursus
-            tempus.
-          </motion.p>
+            <motion.h1 variants={fadeUp} className='relative text-2xl md:text-4xl lg:text-5xl font-bold leading-[1.40]'>
+              <span className='relative'>
+                {heroData.appName}
+                <svg
+                  className='absolute left-2 bottom-0 w-20 lg:w-40'
+                  height='60'
+                  viewBox='0 0 278 82'
+                  fill='none'
+                  xmlns='http://www.w3.org/2000/svg'>
+                  <path
+                    d='M225.325 16.0525C206.359 9.83672 146.22 2.40419 57.3937 22.4006C-31.4322 42.397 6.15813 64.8532 36.0565 73.5818C68.4575 79.7976 151.594 86.5953 221.769 67.2337C252.195 60.6212 302.297 41.1275 259.307 16.0525C249.429 10.7624 214.736 0.578977 154.992 2.16599'
+                    stroke='#007F5F'
+                    strokeWidth='4'
+                  />
+                </svg>
+              </span>
+            </motion.h1>
+
+            <motion.p variants={fadeUp} className='text-[#B5BBBB] my-6 text-base md:text-[22px] md:leading-[40px] pr-4 max-w-2xl'>
+              {heroData.description}
+            </motion.p>
+          </div>
 
           {/* store badges */}
           <motion.div variants={fadeUp} className="flex gap-5 pt-4">
@@ -137,27 +142,17 @@ export default function Hero() {
             </motion.div>
           </motion.div>
         </div>
-
-        {/* Right mock */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, ease: EASE }}
-          className="col-span-1 grid min-h-[500px] place-items-center"
-        >
-          <div
-            style={{ width: "500px", height: "500px", position: "relative" }}
-          >
-            <Image
-              src={heroImg}
-              alt="hero-img"
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 500px"
-              className="drop-shadow-xl object-contain"
-            />
-          </div>
-        </motion.div>
+        <div className='py-4'>
+          <Image
+            src={urlFor(heroData.heroImage.asset).url()}
+            alt={heroData.heroImage.alt}
+            width={480}
+            height={420}
+            priority
+            className='object-contain'
+            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+          />
+        </div>
       </motion.div>
     </section>
   );

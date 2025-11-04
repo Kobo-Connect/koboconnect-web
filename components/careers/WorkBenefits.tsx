@@ -1,42 +1,39 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
-import { motion, type Variants } from "framer-motion";
-import icon from "@/assets/images/icon.png";
+import { Variants } from "framer-motion";
+import MotionWrapper from "../shared/MotionWrapper";
 
-const benefitsList = [
-  {
-    title: "Work From Anywhere",
-    icon: icon,
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    title: "Lorem ipsum",
-    icon: icon,
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    title: "Lorem ips",
-    icon: icon,
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    title: "Lorem ipsu",
-    icon: icon,
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    title: "Work From Anywher",
-    icon: icon,
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    title: "Lorem ipsm",
-    icon: icon,
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-];
+interface Benefit {
+  title: string;
+  description: string;
+  icon: {
+    asset: {
+      _id: string;
+      url: string;
+      metadata: {
+        dimensions: {
+          width: number;
+          height: number;
+        };
+      };
+    };
+    alt: string;
+  };
+}
+
+interface BenefitsSection {
+  title?: string;
+  subtitle?: string;
+  benefits: Benefit[];
+}
+
+interface CareersPageData {
+  benefitsSection: BenefitsSection;
+}
+
+interface WorkBenefitsProps {
+  careersPageData: CareersPageData;
+}
 
 // Typed easing (cubic-bezier)
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -50,7 +47,7 @@ const container: Variants = {
   },
 };
 
-const item: Variants = {
+const itemVariant: Variants = {
   hidden: { opacity: 0, y: 20 },
   show: {
     opacity: 1,
@@ -59,47 +56,63 @@ const item: Variants = {
   },
 };
 
-function WorkBenefits() {
+function WorkBenefits({ careersPageData }: WorkBenefitsProps) {
+  const { benefitsSection } = careersPageData;
+
+  // Use Sanity data if available, otherwise fallback
+  const benefitsList =
+    benefitsSection.benefits && benefitsSection.benefits.length > 0
+      ? benefitsSection.benefits.map((benefit) => ({
+        title: benefit.title,
+        description: benefit.description,
+        icon: benefit.icon.asset.url,
+      }))
+      : [];
   return (
-    <section className="max-w-6xl mx-auto">
-      <motion.div
-        variants={container}
+    <div className='max-w-7xl mx-auto'>
+      {benefitsSection.title && (
+        <div className='mb-8'>
+          <h6 className='text-[#009A74]'>Benefits</h6>
+          <h2 className='text-[#010101] text-2xl lg:text-3xl font-semibold'>
+            {benefitsSection.title}
+          </h2>
+          {benefitsSection.subtitle && (
+            <p className='text-[#363E3F] mt-2'>{benefitsSection.subtitle}</p>
+          )}
+        </div>
+      )}
+
+      <MotionWrapper variants={container}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.3 }}
-        className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 md:gap-6 lg:gap-8"
-      >
-        {benefitsList.map((itemData, index) => (
-          <motion.div
-            key={index}
-            variants={item}
-            whileHover={{ y: -3 }}
-            transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            className="flex items-start gap-4 bg-white p-3 rounded-xl"
-          >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "tween", duration: 0.25 }}
-              className="flex-shrink-0"
-            >
-              <Image
-                src={itemData.icon}
-                alt={itemData.title}
-                className="rounded-full"
-                width={70}
-                height={70}
-              />
-            </motion.div>
-            <div>
-              <h2 className="text-lg font-semibold text-[#010101]">
-                {itemData.title}
-              </h2>
-              <p className="text-base text-[#363E3F]">{itemData.description}</p>
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
-    </section>
+        viewport={{ once: true, amount: 0.3 }}>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8'>
+          {benefitsList.map((item, index) => (
+            <MotionWrapper as="div" key={index}
+              variants={itemVariant}
+              whileHover={{ y: -3 }}
+              transition={{ type: "spring", stiffness: 260, damping: 20 }} className='flex items-start gap-4'>
+              <MotionWrapper whileHover={{ scale: 1.05 }}
+                transition={{ type: "tween", duration: 0.25 }}
+                className="flex-shrink-0">
+                <Image
+                  src={typeof item.icon === "string" ? item.icon : item.icon}
+                  alt='icon'
+                  className='rounded-full'
+                  width={70}
+                  height={70}
+                />
+              </MotionWrapper>
+
+              <div>
+                <h2 className='text-lg font-semibold'>{item.title}</h2>
+                <p className='text-base text-[#363E3F]'>{item.description}</p>
+              </div>
+            </MotionWrapper>
+          ))}
+        </div>
+      </MotionWrapper>
+    </div>
   );
 }
 

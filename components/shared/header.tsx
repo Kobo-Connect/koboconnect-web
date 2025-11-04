@@ -1,8 +1,8 @@
-"use client";
+"use client";;
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@mantine/core";
-import NavMenu from "../home/nav-menu";
+import NavMenu from "@/components/ui/NavMenu";
 import vaultImage from "@/assets/images/koboVault.png";
 import aboutImage from "@/assets/images/aboutUs.png";
 import careerImage from "@/assets/images/careers.png";
@@ -38,17 +38,16 @@ const navLinks = [
     children: (
       <div className="grid grid-cols-3 gap-8 container mx-auto p-4 rounded-2xl rounded-b-2xl">
         <Link
-          href="/personal"
-          className="rounded-xl bg-[#0A1B1B] flex flex-col relative h-[240px]"
-        >
-          <div className="p-5 flex flex-col gap-1">
-            <h2 className="text-white font-bold">Kobo Vault</h2>
-            <h6 className="text-[#B5BBBB]">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          href='/personal'
+          className='rounded-xl group border-[#B0D0CE] border hover:border-[#0A1B1B] transition-all duration-300 hover:bg-[#0A1B1B] flex flex-col relative h-[240px]'>
+          <div className='p-5 flex  flex-col gap-1'>
+            <h2 className='text-black text-base font-bold group-hover:text-white'>Kobo Vault</h2>
+            <h6 className='text-[#405255] group-hover:text-white text-sm'>
+              Secure, smart, seamless digital banking for everyone.
             </h6>
           </div>
 
-          <div className="bg-[#203C3A] rounded-t-xl absolute bottom-0 right-3">
+          <div className='group-hover:bg-[#203C3A] bg-[#B0D0CE] rounded-t-xl absolute bottom-0 right-3'>
             <Image
               className="mt-2 mr-2 rounded-t-xl"
               src={vaultImage}
@@ -60,20 +59,21 @@ const navLinks = [
         </Link>
 
         <Link
-          href="#"
-          className="rounded-xl border border-[#B0D0CE] flex flex-col relative h-[240px]"
-        >
-          <div className="p-5 flex flex-col gap-1">
-            <div className="flex gap-2 items-center">
-              <h2 className="font-bold">Kobo Ride</h2>
-              <span className="text-[#FC8541] bg-[#FFEFE8] px-2 py-1 rounded-md text-xs">
+          href='#'
+          className='rounded-xl cursor-not-allowed group border-[#B0D0CE] border hover:border-[#0A1B1B] transition-all duration-300 hover:bg-[#0A1B1B] flex flex-col relative h-[240px]'>
+          <div className='p-5 flex flex-col gap-1'>
+            <div className='flex gap-2 items-center'>
+              <h2 className='font-bold text-base group-hover:text-white'>Kobo Ride</h2>
+              <span className='text-[#FC8541] bg-[#FFEFE8] px-2 py-1 rounded-md text-xs'>
                 Coming Soon
               </span>
             </div>
-            <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h6>
+            <h6 className='text-[#405255] group-hover:text-white text-sm'>
+              Fast, reliable, and affordable rides at your fingertips.{" "}
+            </h6>
           </div>
 
-          <div className="bg-[#203C3A] rounded-t-xl absolute bottom-0 right-3">
+          <div className='group-hover:bg-[#203C3A] bg-[#B0D0CE]  rounded-t-xl absolute bottom-0 right-3'>
             <Image
               className="mt-2 mr-2 rounded-t-xl"
               src={koboRideImage}
@@ -145,15 +145,16 @@ const navLinks = [
       <div className="grid grid-cols-2 gap-8 p-4">
         <div>
           <Link
-            href="/company/about-us"
-            className="rounded-xl border border-[#B0D0CE] flex flex-col relative h-[240px]"
-          >
-            <div className="p-5 flex flex-col gap-1">
-              <h2 className="font-bold">About Us</h2>
-              <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h6>
+            href='/company/about-us'
+            className='rounded-xl group border hover:border-[#0A1B1B] transition-all duration-300 hover:bg-[#0A1B1B] border-[#B0D0CE] flex flex-col relative h-[240px]'>
+            <div className='p-5 flex flex-col gap-1'>
+              <h2 className='font-bold text-black text-base group-hover:text-white'>About Us</h2>
+              <h6 className='text-[#405255] text-sm group-hover:text-white'>
+                Our mission is to connect Africa through technology.{" "}
+              </h6>
             </div>
 
-            <div className="bg-[#B0D0CE] rounded-t-xl absolute bottom-0 right-3">
+            <div className='bg-[#B0D0CE] group-hover:bg-[#203C3A]  rounded-t-xl absolute bottom-0 right-3'>
               <Image
                 className="mt-2 mr-2 rounded-t-xl"
                 src={aboutImage}
@@ -167,15 +168,14 @@ const navLinks = [
 
         <div className="flex h-full flex-col gap-2">
           <Link
-            href="/company/careers"
-            className="relative h-[50%] rounded-xl border border-[#B0D0CE] bg-[#0A1B1B]"
-          >
-            <div className="p-5 flex flex-col gap-1">
-              <h2 className="font-bold text-white">Careers</h2>
-              <h6 className="text-[#B5BBBB]">Join a team of mavericks.</h6>
+            href='/company/careers'
+            className='h-[50%] rounded-xl group hover:border-[#0A1B1B] border transition-all duration-300 hover:bg-[#0A1B1B] border-[#B0D0CE] relative'>
+            <div className='p-5 flex flex-col gap-1'>
+              <h2 className='font-bold text-black text-base group-hover:text-white'>Careers</h2>
+              <h6 className='text-[#405255] text-sm group-hover:text-white'>Join a team of mavericks.</h6>
             </div>
 
-            <div className="bg-[#203C3A] rounded-t-xl absolute bottom-0 right-0">
+            <div className='group-hover:bg-[#203C3A] bg-[#B0D0CE] rounded-t-xl absolute bottom-0 right-0'>
               <Image
                 className="mt-2 mr-2 rounded-t-xl"
                 src={careerImage}
@@ -187,15 +187,16 @@ const navLinks = [
           </Link>
 
           <Link
-            href="/company/press"
-            className="relative h-[50%] rounded-xl border border-[#B0D0CE]"
-          >
-            <div className="p-5 flex flex-col gap-1">
-              <h2 className="font-bold">Press</h2>
-              <h6 className="text-[#363E3F]">Lorem ipsum dolor sit amet.</h6>
+            href='/company/press'
+            className='h-[50%] rounded-xl group hover:border-[#0A1B1B] border transition-all duration-300 hover:bg-[#0A1B1B] border-[#B0D0CE] relative'>
+            <div className='p-5 flex flex-col gap-1'>
+              <h2 className='font-bold text-base text-black group-hover:text-white'>Press</h2>
+              <h6 className='text-[#405255] text-sm group-hover:text-white'>
+                Our latest news, & media updates.
+              </h6>
             </div>
 
-            <div className="bg-[#B0D0CE] rounded-t-xl absolute bottom-0 right-0">
+            <div className='group-hover:bg-[#203C3A] bg-[#B0D0CE] rounded-t-xl absolute bottom-0 right-0'>
               <Image
                 className="mt-2 mr-2 rounded-t-xl"
                 src={pressImage}
@@ -223,8 +224,8 @@ export default function Header({
   logo: React.ReactNode;
 }) {
   return (
-    <div className="z-20" style={{ backgroundColor }}>
-      <div className="hidden md:block">
+    <div className='z-20' style={{ backgroundColor }}>
+      <div className='hidden md:block'>
         <DesktopHeader textColor={textColor} logo={logo} />
       </div>
       <div className="md:hidden">
@@ -235,7 +236,7 @@ export default function Header({
 }
 
 function DesktopHeader({
-  textColor = "white",
+  textColor = "#CCE5DF",
   logo,
 }: {
   textColor: string;
@@ -243,10 +244,18 @@ function DesktopHeader({
 }) {
   const pathName = usePathname();
 
+  // handle button variant based on current path
   const handleButtonVariant = useCallback(
-    (href?: string) => {
-      if (!href) return "subtle";
-      return pathName.includes(href) ? "filled" : "subtle";
+    (href: string) => {
+      if (!href) {
+        return "subtle";
+      }
+
+      if (pathName.includes(href)) {
+        return "filled";
+      }
+
+      return "subtle";
     },
     [pathName]
   );
@@ -257,7 +266,7 @@ function DesktopHeader({
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.8 }}
-      className="mx-auto flex max-w-6xl items-center justify-between px-4 py-6"
+      className="mx-auto flex max-w-7xl items-center justify-between px-4 py-6"
     >
       <motion.div variants={itemVariants}>
         <Link href="/">{logo}</Link>
@@ -273,12 +282,13 @@ function DesktopHeader({
           <motion.div key={link.label} variants={itemVariants}>
             {link.children ? (
               <NavMenu
-                label={link.label}
+                key={link.label}
+                link={link}
                 color={textColor}
-                buttonVariant={handleButtonVariant(link?.href as string)}
-              >
-                {link.children}
-              </NavMenu>
+                buttonOptions={{
+                  variant: handleButtonVariant(link?.href as string),
+                }}
+              />
             ) : (
               <Link href={link.href!}>
                 <Button

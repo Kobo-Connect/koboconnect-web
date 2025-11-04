@@ -1,10 +1,34 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
 import { Button, Input } from "@mantine/core";
-import { motion, type Variants } from "framer-motion";
-import evelopeImage from "@/assets/images/envelope.png";
+import { urlFor } from "@/lib/sanity/image";
+import { type Variants } from "framer-motion";
+import MotionWrapper from "../shared/MotionWrapper";
+
+interface SubscribeSectionConfig {
+  title: string;
+  subtitle: string;
+  image?: {
+    asset: {
+      _id: string;
+      url: string;
+      metadata: {
+        dimensions: {
+          width: number;
+          height: number;
+        };
+      };
+    };
+    alt: string;
+  };
+  buttonText: string;
+  placeholderText: string;
+  showSection: boolean;
+}
+
+interface SubscribeArticleBannerProps {
+  pressPageData: any;
+}
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -35,79 +59,87 @@ const copyUp: Variants = {
   },
 };
 
-export default function SubscribeArticleBanner() {
+function SubscribeArticleBanner({
+  pressPageData,
+}: SubscribeArticleBannerProps) {
+  // config for the section from sanity or render default fallback
+  const config: SubscribeSectionConfig = pressPageData?.subscribeSection || {
+    title: "Read more articles like this",
+    subtitle:
+      "Lorem ipsum dolor sit amet, consectetur adip elit. Praesent eget leo ac eros facilisis finibus.",
+    buttonText: "Subscribe",
+    placeholderText: "Enter your email",
+    showSection: true,
+    image: null,
+  };
+
+  // if the section is not shown, return null
+  if (!config.showSection) {
+    return null;
+  }
+
   return (
-    <section className="mx-auto max-w-6xl rounded-2xl bg-[#007F5E]">
-      <motion.div
-        variants={section}
+    <div className='max-w-7xl mx-auto bg-[#007F5E] rounded-2xl'>
+      <MotionWrapper variants={section}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.35 }}
-        className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6"
-      >
-        {/* Left: image */}
-        <motion.div variants={imgPop} className="relative col-span-1">
-          <motion.div
-            animate={{ y: [0, -6, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: EASE }}
-            className="p-4 md:p-6"
-          >
-            <Image
-              src={evelopeImage}
-              alt="envelope"
-              width={500}
-              height={500}
-              className="h-auto w-full object-contain"
-              priority
-            />
-          </motion.div>
-        </motion.div>
+        viewport={{ once: true, amount: 0.35 }} className='grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6'>
+        {config.image && (
+          <div className='col-span-1'>
+            {/* Left: image */}
+            <MotionWrapper variants={imgPop} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.35 }}>
+              <MotionWrapper animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: EASE }}>
+                <Image
+                  src={urlFor(config.image.asset).url()}
+                  alt={config.image.alt}
+                  width={500}
+                  height={500}
+                  className='object-cover'
+                />
+              </MotionWrapper>
+
+            </MotionWrapper>
+
+          </div>
+        )}
 
         {/* Right: copy + form */}
-        <motion.div
-          variants={copyUp}
-          className="col-span-1 flex flex-col justify-center px-4 pb-8 pt-2 md:px-0 md:pr-4"
-        >
-          <div className="mb-6 space-y-2 max-w-md">
-            <h2 className="text-2xl font-semibold text-white lg:text-3xl">
-              Read more articles like this
+        <div className='col-span-1 flex flex-col justify-center pr-4 max-w-md'>
+          <div className='mb-6 space-y-2'>
+            <h2 className='text-white text-2xl lg:text-3xl font-semibold'>
+              {config.title}
             </h2>
-            <p className="text-lg text-[#CCE5DF]">
-              Lorem ipsum dolor sit amet, consectetur adip elit. Praesent eget
-              leo ac eros facilisis finibus.
-            </p>
+            <p className='text-[#CCE5DF] text-lg'>{config.subtitle}</p>
           </div>
 
-          <div className="flex w-full max-w-md items-center gap-2">
-            <motion.div
-              className="flex-1"
+          <div className='flex items-center gap-2 w-full'>
+            <MotionWrapper className="flex-1"
               whileFocus={{ scale: 1.005 }}
-              transition={{ type: "tween", duration: 0.12, ease: EASE }}
-            >
+              transition={{ type: "tween", duration: 0.12, ease: EASE }}>
               <Input
-                variant="unstyled"
-                className="placeholder:text-[#ABCCC4]"
+                variant='unstyled'
+                className='placeholder:text-[#ABCCC4]'
                 style={{
                   borderBottom: "1px solid #FFFFFF4D",
+                  width: "70%",
                   color: "#FFFFFF",
                 }}
-                placeholder="Enter your email"
+                placeholder={config.placeholderText}
               />
-            </motion.div>
-
-            <motion.div
-              whileHover={{ y: -1 }}
+            </MotionWrapper>
+            <MotionWrapper whileHover={{ y: -1 }}
               whileTap={{ scale: 0.98 }}
-              transition={{ type: "tween", duration: 0.12, ease: EASE }}
-              className="w-[40%] sm:w-[35%]"
-            >
-              <Button variant="filled" color="#009A74" fullWidth>
-                Subscribe
+              transition={{ type: "tween", duration: 0.12, ease: EASE }} className='w-[30%]'>
+              <Button variant='filled' color='#009A74' fullWidth>
+                {config.buttonText}
               </Button>
-            </motion.div>
+            </MotionWrapper>
           </div>
-        </motion.div>
-      </motion.div>
-    </section>
+        </div>
+      </MotionWrapper>
+    </div>
   );
 }
+
+export default SubscribeArticleBanner;

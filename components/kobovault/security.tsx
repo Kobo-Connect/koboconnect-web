@@ -45,7 +45,7 @@ const imagePop: Variants = {
 
 function Security() {
   return (
-    <section className="container mx-auto flex max-w-6xl flex-col items-center gap-8 px-4 py-6 md:flex-row md:gap-12 md:py-10">
+    <section className=" mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-6 md:flex-row md:gap-12 md:py-10">
       {/* Left: Copy + features */}
       <motion.div
         variants={section}

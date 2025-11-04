@@ -37,7 +37,7 @@ function TotalControl() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.3 }}
-      className="container max-w-6xl mx-auto py-6 md:py-10 px-4 flex flex-col md:flex-row gap-8 md:gap-16 items-end"
+      className="max-w-7xl mx-auto py-6 md:py-10 px-4 flex flex-col md:flex-row gap-8 md:gap-16 items-end"
     >
       {/* IMAGE */}
       <motion.div variants={fadeUp} className="relative">

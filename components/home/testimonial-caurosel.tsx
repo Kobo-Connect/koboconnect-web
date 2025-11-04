@@ -18,59 +18,92 @@ const slideVariants: Variants = {
   },
 };
 
-function TestimonialCaurosel() {
+interface TestimonialCauroselProps {
+  testimonials: Array<{
+    name: string;
+    title: string;
+    comment: string;
+    rating: number;
+    image:
+    | string
+    | {
+      asset: {
+        _id: string;
+        url: string;
+        metadata: {
+          dimensions: {
+            width: number;
+            height: number;
+          };
+        };
+      };
+      alt: string;
+    };
+  }>;
+}
+
+function TestimonialCaurosel({ testimonials }: TestimonialCauroselProps) {
   const [active, setActive] = useState(0);
 
-  const testimonials = [
+  // Fallback data if no testimonials provided
+  const fallbackTestimonials = [
     {
-      id: 1,
       name: "John Doe",
-      image: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg",
+      image: {
+        asset: {
+          _id: "",
+          url: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg",
+          metadata: { dimensions: { width: 0, height: 0 } },
+        },
+        alt: "John Doe",
+      },
       rating: 4,
       title: "Product Designer",
       comment:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget leo a facilisis finibus scelerisque. In et venenatis leo, non luctus mau. Maecenas efficitur volutpat nibh, a aliquet elit.",
     },
-    {
-      id: 2,
-      name: "Lucky Ekezie",
-      image: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg",
-      rating: 4,
-      title: "CEO, Kobo Connect",
-      comment:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget leo a facilisis finibus scelerisque. In et venenatis leo, non luctus mau. Maecenas efficitur volutpat nibh, a aliquet elit.",
-    },
-    {
-      id: 3,
-      name: "Lucky Ekezie",
-      image: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg",
-      rating: 4,
-      title: "CEO, Kobo Connect",
-      comment:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget leo a facilisis finibus scelerisque. In et venenatis leo, non luctus mau. Maecenas efficitur volutpat nibh, a aliquet elit.",
-    },
   ];
+
+  const displayTestimonials =
+    testimonials && testimonials.length > 0
+      ? testimonials
+      : fallbackTestimonials;
 
   return (
     <Carousel
-      height="100%"
-      slideSize="70%"
-      slideGap="lg"
-      controlsOffset="sm"
-      controlSize={26}
-      onSlideChange={setActive}
-      withControls
-      withIndicators
-      styles={{
-        indicator: { background: "#009A74" },
-      }}
-      emblaOptions={{ dragFree: false, align: "start", loop: false }}
-    >
-      {testimonials.map((t, i) => {
-        const isActive = active === i;
+      height={"100%"}
 
+      slideSize='70%'
+      slideGap='lg'
+      withControls
+      styles={{
+        root: {
+          paddingLeft: 10,
+          paddingRight: 20,
+        },
+        control: {
+          zIndex: 2,
+          marginRight: -30,
+          marginLeft: -25,
+          "dataInactive": {
+            opacity: 0,
+            cursor: "default",
+          },
+        },
+      }}
+      emblaOptions={{
+        loop: true,
+        dragFree: true,
+        align: "start",
+      }}
+      onSlideChange={setActive}
+    >
+      {displayTestimonials.map((testimonial, index) => {
+        const isActive = index === 0;
         return (
-          <Carousel.Slide key={t.id} className="py-4">
+          <Carousel.Slide key={`${testimonial.name}-${index}`} className='py-4 '>
+
+
             <motion.div
               variants={slideVariants}
               initial="hidden"
@@ -92,11 +125,11 @@ function TestimonialCaurosel() {
                 transition={{ type: "tween", duration: 0.25, ease: EASE }}
                 className="h-full"
               >
-                <TestimonialCard testimonial={t} />
+                <TestimonialCard testimonial={testimonial} />
               </motion.div>
             </motion.div>
           </Carousel.Slide>
-        );
+        )
       })}
     </Carousel>
   );

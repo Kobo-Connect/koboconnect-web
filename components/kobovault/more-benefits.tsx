@@ -55,7 +55,7 @@ function MoreBenefits() {
   ];
 
   return (
-    <section className="container mx-auto max-w-6xl px-4 py-6 md:py-8">
+    <section className="container mx-auto max-w-7xl px-4 py-6 md:py-8">
       {/* Header */}
       <motion.div
         variants={header}

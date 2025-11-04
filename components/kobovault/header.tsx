@@ -54,7 +54,7 @@ function DesktopHeader() {
       variants={container}
       initial="hidden"
       animate="show"
-      className="container mx-auto flex items-center justify-between px-4 py-5"
+      className="mx-auto max-w-7xl flex items-center justify-between px-4 py-5"
     >
       {/* Logo */}
       <motion.div variants={fadeUp}>

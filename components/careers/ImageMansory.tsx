@@ -1,7 +1,22 @@
 "use client";
-import React from "react";
+import { Variants, motion } from "framer-motion";
 import Image from "next/image";
-import { motion, type Variants } from "framer-motion";
+import React from "react";
+
+type SanityImage = {
+  asset: {
+    _id: string;
+    url: string;
+    metadata: {
+      dimensions: {
+        width: number;
+        height: number;
+      };
+    };
+  };
+  alt: string;
+  caption?: string;
+};
 
 type MasonryImage = {
   src: string;
@@ -11,6 +26,7 @@ type MasonryImage = {
 
 type Props = {
   images?: MasonryImage[];
+  sanityImages?: SanityImage[];
   rounded?: string; // tailwind rounding, e.g. "rounded-2xl"
 };
 
@@ -46,8 +62,18 @@ const DEFAULT_IMAGES: MasonryImage[] = [
   },
 ];
 
-// 4 columns on md+; indices of images per column (top→bottom)
-const DEFAULT_COLUMN_MAP: number[][] = [[0], [1, 2], [3, 4], [5, 6]];
+// Layout mapping to 4 columns on md+ screens to match the Figma reference.
+// Each array entry contains the indices of images placed in that column (top-to-bottom).
+// We also add an offset class on the very first tile to visually "center" it in its column.
+const DEFAULT_COLUMN_MAP: number[][] = [
+  [0],
+  // col 2: two stacked images
+  [1, 2],
+  // col 3: two stacked images (will be pushed down via margin-top)
+  [3, 4],
+  // col 4: two stacked images
+  [5, 6],
+];
 
 // Easing (typed cubic-bezier)
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -79,33 +105,45 @@ const tileVariants: Variants = {
     transition: { type: "tween", duration: 0.45, ease: EASE },
   },
 };
-
 function ImageMansory({
   images = DEFAULT_IMAGES,
+  sanityImages,
   rounded = "rounded-xl",
 }: Props) {
-  const items = images.slice(0, 7);
+  // Convert Sanity images to MasonryImage format if provided
+  const convertedImages: MasonryImage[] =
+    sanityImages && sanityImages.length > 0
+      ? sanityImages.map((sanityImg, index) => ({
+        src: sanityImg.asset.url,
+        alt: sanityImg.alt || `Culture image ${index + 1}`,
+        className: sanityImg.caption ? "has-caption" : undefined,
+      }))
+      : images;
+
+  // Safety: enforce exactly 7 items if more provided.
+  const items = convertedImages.slice(0, 7);
+
+  // If no images available, return null
+  if (items.length === 0) {
+    return null;
+  }
+  // Build 4 columns map from provided images when count is 7.
   const columnMap = DEFAULT_COLUMN_MAP;
 
   return (
-    <motion.div
-      variants={gridVariants}
+    <motion.div variants={gridVariants}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.25 }}
-      className="grid grid-cols-2 gap-6 md:grid-cols-4"
-    >
+      viewport={{ once: true, amount: 0.25 }} className='grid grid-cols-2 md:grid-cols-4 gap-6'>
       {columnMap.map((col, colIdx) => (
-        <motion.div
+        <motion.div variants={columnVariants}
           key={colIdx}
-          variants={columnVariants}
-          className={`grid gap-6 ${colIdx === 2 ? "mt-6 md:mt-12" : ""}`}
-        >
-          {col.map((imgIdx) => {
+          className={`grid gap-6 ${colIdx === 2 ? "mt-6 md:mt-12" : ""}`}>
+          {col.map((imgIdx, idxInCol) => {
             const item = items[imgIdx];
             if (!item) return null;
 
-            // Center single image in first column on md+
+            // Center single image in column 1; others default
             const offsetClass = colIdx === 0 ? "md:self-center" : "";
 
             return (
@@ -114,13 +152,12 @@ function ImageMansory({
                 variants={tileVariants}
                 whileHover={{ y: -3 }}
                 transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                className={`relative aspect-square w-full overflow-hidden ${rounded} ${offsetClass}`}
-              >
+                className={`relative aspect-square w-full overflow-hidden ${rounded} ${offsetClass}`}>
                 <Image
                   src={item.src}
                   alt={item.alt || ""}
                   fill
-                  sizes="(min-width: 768px) 25vw, 50vw"
+                  sizes='(min-width: 768px) 25vw, 50vw'
                   className={`object-cover ${rounded} ${item.className ?? ""}`}
                 />
               </motion.div>

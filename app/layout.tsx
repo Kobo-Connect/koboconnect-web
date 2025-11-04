@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
-import '@mantine/core/styles.css';
+import "@mantine/core/styles.css";
 
-import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core';
+import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core";
 import { ThemeProvider } from "@/components/theme-provider";
 
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -16,7 +17,8 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   applicationName: "Kobo Connect",
   title: {
-    default: "Kobo Connect — Super App for Mobile Banking, Bills & Virtual Cards",
+    default:
+      "Kobo Connect — Super App for Mobile Banking, Bills & Virtual Cards",
     template: "%s | Kobo Connect",
   },
   description:
@@ -24,6 +26,7 @@ export const metadata: Metadata = {
   keywords: [
     "Kobo Connect",
     "Kobo Vault",
+    "Next generation super app",
     "fintech app",
     "mobile banking",
     "online banking",
@@ -36,9 +39,9 @@ export const metadata: Metadata = {
     "send money",
     "digital wallet",
   ],
-  authors: [{ name: "KoboSquare" }],
-  creator: "KoboSquare",
-  publisher: "KoboSquare",
+  authors: [{ name: "KoboConnect" }],
+  creator: "KoboConnect",
+  publisher: "KoboConnect",
   category: "Finance, Fintech, Mobile Banking",
   robots: {
     index: true,
@@ -65,11 +68,12 @@ export const metadata: Metadata = {
     title: "Kobo Connect — Super App for Mobile Banking, Bills & Virtual Cards",
     description:
       "Experience Kobo Vault online banking, pay bills instantly, and create virtual cards — all in the Kobo Connect super app.",
-    creator: "@kobosquare",
+    creator: "@koboconnect",
   },
 };
 
-
+// revalidate cache every 60 minutes
+export const revalidate = 3600;
 
 export default async function RootLayout({
   children,
@@ -77,16 +81,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" {...mantineHtmlProps}>
+    <html lang='en' {...mantineHtmlProps}>
       <head>
         <ColorSchemeScript async />
       </head>
-      <body
-        className={` ${manrope.className} antialiased`}
-      >
+      <body className={` ${manrope.className} antialiased`}>
         <ThemeProvider>
           {children}
-
+          <SpeedInsights />
           <Analytics />
         </ThemeProvider>
       </body>

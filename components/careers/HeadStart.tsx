@@ -1,8 +1,7 @@
-"use client";
-
 import React from "react";
-import { motion, type Variants } from "framer-motion";
+import { type Variants } from "framer-motion";
 import ImageMansory from "./ImageMansory";
+import MotionWrapper from "../shared/MotionWrapper";
 
 // Typed easing (cubic-bezier)
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -36,50 +35,67 @@ const textVariants: Variants = {
   },
 };
 
-function HeadStart() {
+interface CultureSection {
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  cultureImages?: {
+    asset: {
+      _id: string;
+      url: string;
+      metadata: {
+        dimensions: {
+          width: number;
+          height: number;
+        };
+      };
+    };
+    alt: string;
+    caption?: string;
+  }[];
+}
+
+interface CareersPageData {
+  cultureSection: CultureSection;
+}
+
+interface HeadStartProps {
+  careersPageData: CareersPageData;
+}
+
+function HeadStart({ careersPageData }: HeadStartProps) {
+  const { cultureSection } = careersPageData;
   return (
-    <section className="max-w-6xl mx-auto px-4 space-y-4 md:space-y-12 lg:space-y-16">
-      {/* Heading */}
-      <motion.div
-        variants={headerVariants}
+    <div className='max-w-7xl mx-auto px-4 space-y-4 md:space-y-12 lg:space-y-16'>
+      <MotionWrapper as="div" variants={headerVariants}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.4 }}
-        className="flex flex-col gap-2 max-w-sm"
-      >
-        <h6 className="text-[#009A74] text-lg md:text-xl">Head Start</h6>
-        <h2 className="text-[#010101] text-2xl md:text-3xl lg:text-4xl font-semibold">
-          Build your career with Kobo Connect
+        viewport={{ once: true, amount: 0.4 }} className='flex flex-col gap-2 max-w-sm'>
+        <h6 className='text-[#009A74] text-lg md:text-xl'>
+          {cultureSection.subtitle || "Head Start"}
+        </h6>
+        <h2 className='text-[#010101] text-2xl md:text-3xl lg:text-4xl font-semibold'>
+          {cultureSection.title || "Build your career with Kobo Connect"}
         </h2>
-      </motion.div>
+      </MotionWrapper>
 
       {/* Image masonry block (wrapped for animation without touching the component) */}
-      <motion.div
-        variants={blockVariants}
+      <MotionWrapper as="div" variants={blockVariants}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.3 }}
-      >
-        <ImageMansory />
-      </motion.div>
+        viewport={{ once: true, amount: 0.4 }}>
+        <ImageMansory sanityImages={cultureSection.cultureImages} />
+      </MotionWrapper>
 
-      {/* Paragraph */}
-      <motion.div
-        variants={textVariants}
+      <MotionWrapper variants={textVariants}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.4 }}
-        className="max-w-5xl"
-      >
-        <p className="text-[#363E3F] text-base md:text-lg">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget
-          leo ac eros facilisis finibus scelerisque sit amet turpis. In et
-          venenatis leo, non luctus mauris. Maecenas efficitur volutpat nibh, a
-          aliquet elit. Praesent eget leo ac eros facilisis finibus scelerisque
-          turpis.
+        viewport={{ once: true, amount: 0.4 }} className='max-w-5xl'>
+        <p className='text-[#363E3F] text-base md:text-lg'>
+          {cultureSection.description}
         </p>
-      </motion.div>
-    </section>
+      </MotionWrapper>
+    </div>
   );
 }
 

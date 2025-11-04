@@ -1,22 +1,9 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
-import kobovaultServices from "@/assets/images/koboVault-Services.png";
-import locationIcon from "@/assets/locationIcon.svg";
-import smsIcon from "@/assets/smsIcon.svg";
-import callIcon from "@/assets/callIcon.svg";
-
-const contactInfo = [
-  {
-    title: "Address",
-    value: "123 Main Street, Lagos, Nigeria",
-    icon: locationIcon,
-  },
-  { title: "Email", value: "contact@koboconnect.com", icon: smsIcon },
-  { title: "Phone", value: "+234 123 456 789", icon: callIcon },
-];
+import { PortableText } from "@portabletext/react";
+import { HomePageData } from "@/lib/sanity/queries/home";
 
 // Typed easing (cubic-bezier)
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -72,87 +59,116 @@ const contactCard: Variants = {
   },
 };
 
-export default function KoboConnect() {
+interface KoboConnectProps {
+  data?: HomePageData["koboConnectSection"];
+}
+
+export default function KoboConnect({ data }: KoboConnectProps) {
+  const koboConnectData = data!;
+
   return (
-    <section className="bg-transparent">
-      <div className="container mx-auto max-w-6xl px-4 py-10 md:py-20">
-        <motion.div
-          variants={section}
+    <section>
+      <div className=' mx-auto py-10 md:py-20 px-4 max-w-7xl'>
+        <motion.div variants={section}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
-        >
+          viewport={{ once: true, amount: 0.3 }}>
           {/* Heading */}
           <motion.div variants={header} className="mb-4">
-            <h2 className="mb-2 text-xl font-medium text-[#009A74]">
-              What is Kobo Connect?
+
+            <h2 className='text-[#009A74] font-medium text-xl mb-2'>
+              {koboConnectData.subtitle}
             </h2>
-            <h1 className="text-2xl font-bold leading-[1.25] text-[#010101]">
-              Africa’s next-generation super app <br />
-              All in one integrated digital platform
-            </h1>
+
+            <div className='text-2xl lg:text-3xl font-semibold leading-[1.25] max-w-lg text-[#363E3F]'>
+              {koboConnectData.mainTitle &&
+                Array.isArray(koboConnectData.mainTitle) ? (
+                <PortableText
+                  value={koboConnectData.mainTitle}
+                  components={{
+                    block: {
+                      normal: ({ children }) => <span>{children}</span>,
+                      h1: ({ children }) => (
+                        <h1 className='text-2xl lg:text-3xl font-semibold leading-[1.25]'>
+                          {children}
+                        </h1>
+                      ),
+                      h2: ({ children }) => (
+                        <h2 className='text-xl lg:text-2xl font-semibold leading-[1.25]'>
+                          {children}
+                        </h2>
+                      ),
+                      h3: ({ children }) => (
+                        <h3 className='text-lg lg:text-xl font-semibold leading-[1.25]'>
+                          {children}
+                        </h3>
+                      ),
+                    },
+                    marks: {
+                      strong: ({ children }) => (
+                        <strong className='font-bold'>{children}</strong>
+                      ),
+                      em: ({ children }) => (
+                        <em className='italic'>{children}</em>
+                      ),
+                      code: ({ children }) => (
+                        <code className='bg-gray-100 px-1 py-0.5 rounded text-sm'>
+                          {children}
+                        </code>
+                      ),
+                    },
+                  }}
+                />
+              ) : (
+                <span>{koboConnectData.mainTitle || "Default Title"}</span>
+              )}
+            </div>
+          </motion.div>
+        </motion.div>
+
+        {/* Content grid */}
+        <motion.div variants={contactGrid} className='grid grid-cols-1 md:grid-cols-5 gap-8 py-8'>
+          {/* Image */}
+          <motion.div variants={imgPop} className="relative md:col-span-2">
+            <Image
+              src={koboConnectData.servicesImage.asset.url}
+              alt={koboConnectData.servicesImage.alt}
+              width={400}
+              height={400}
+              className='object-contain'
+              priority
+            />
           </motion.div>
 
-          {/* Content grid */}
-          <div className="grid grid-cols-1 items-center gap-8 py-8 md:grid-cols-5">
-            {/* Image */}
-            <motion.div variants={imgPop} className="relative md:col-span-2">
-              <Image
-                src={kobovaultServices}
-                alt="kobovault-services"
-                width={400}
-                height={400}
-                className="object-contain"
-                priority
-              />
-            </motion.div>
+          {/* Copy + contact cards */}
+          <div className='md:col-span-3 flex flex-col gap-6 items-center'>
+            <div className='flex flex-col gap-4 text-[#363E3F]'>
+              {koboConnectData.description.map((paragraph, index) => (
+                <motion.p key={index} variants={copyPara}>{paragraph}</motion.p>
+              ))}
+            </div>
 
-            {/* Copy + contact cards */}
-            <div className="md:col-span-3 flex flex-col items-center gap-6">
-              <div className="flex flex-col gap-4 text-[#363E3F]">
-                <motion.p variants={copyPara}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Praesent eget leo ac eros facilisis finibus scelerisque sit
-                  amet turpis. In et venenatis leo, non luctus mauris. Maecenas
-                  efficitur volutpat nibh, a aliquet elit
-                </motion.p>
-                <motion.p variants={copyPara}>
-                  Aliquam ac tincidunt arcu. Donec dictum odio felis, ac tempor
-                  sapien aliquet non. Donec volutpat blandit posuere. Mauris
-                  nulla enim, placerat non pretium vitae, blandit quis felis.
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Praesent eget leo ac eros facilisis finibus scelerisque sit
-                  amet turpis. In et venenatis leo, non luctus mauris. Maecenas
-                  efficitur volutpat nibh.
-                </motion.p>
-              </div>
-
-              <motion.div
-                variants={contactGrid}
-                className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3"
-              >
-                {contactInfo.map((item, i) => (
-                  <motion.div
-                    key={i}
-                    variants={contactCard}
-                    whileHover={{ y: -3 }}
-                    transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                    className="rounded-lg bg-[#FAFDFE] p-4"
-                  >
-                    <Image
-                      src={item.icon}
-                      alt={item.title}
-                      width={24}
-                      height={24}
-                      className="mb-4"
-                    />
-                    <p className="text-base font-[400] text-[#010101]">
+            <motion.div
+              variants={contactCard}
+              whileHover={{ y: -3 }}
+              transition={{ type: "spring", stiffness: 260, damping: 20 }} className='grid grid-cols-3 gap-4 mt-6'>
+              {koboConnectData.contactInfo.map((item, index) => (
+                <motion.div key={index} variants={contactCard} className='bg-[#FAFDFE] p-4 rounded-lg w-full'>
+                  <Image
+                    src={item.icon.asset.url}
+                    alt={item.icon.alt}
+                    width={24}
+                    height={24}
+                    className='mb-4'
+                  />
+                  <div className=''>
+                    <p className='text-base font-[400] break-words whitespace-normal max-w-full'>
                       {item.value}
                     </p>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
         </motion.div>
       </div>
