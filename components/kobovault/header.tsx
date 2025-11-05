@@ -63,11 +63,11 @@ function DesktopHeader({ logo: sanityLogo, navLinks, ctaButton }: HeaderProps) {
     },
     {
       label: "Business",
-      href: "/business",
+      href: "#",
     },
     {
       label: "CRS",
-      href: "/crs",
+      href: "#",
     },
   ];
 
