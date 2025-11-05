@@ -64,7 +64,7 @@ export default function Hero({ data }: HeroProps) {
   };
 
   return (
-    <section className="relative h-full md:h-[calc(100vh-80px)]">
+    <section className='relative h-full md:h-[calc(100vh-80px)]'>
       <Image
         src={urlFor(heroData.backgroundImage.asset).url()}
         priority
@@ -72,22 +72,24 @@ export default function Hero({ data }: HeroProps) {
         fill
         className='object-cover absolute inset-0 z-0'
       />
-      <motion.div variants={wrap}
-        initial="hidden"
-        animate="show" className='max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between gap-4 py-4 md:py-6 px-4 relative z-10'>
+      <motion.div
+        variants={wrap}
+        initial='hidden'
+        animate='show'
+        className='max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between gap-4 py-4 md:py-6 lg:py-10 px-4 relative z-10'>
         <div className='py-10 text-white max-w-2xl'>
-          <div className="">
-            <h1 className='text-2xl md:text-3xl lg:text-5xl font-bold leading-[1.25]'>
+          <div className=''>
+            <h1 className='text-2xl md:text-3xl lg:text-5xl font-bold leading-[1.30] tracking-wide'>
               {heroData.mainTitle} {""}
-              <span className='text-[#007F5F]'>
-                <TypewriterText
-                  words={heroData.typewriterWords}
-                />
+              <span className='text-[#00BA8B]'>
+                <TypewriterText words={heroData.typewriterWords} />
               </span>
               <br /> {heroData.afterTypewriterText} <br />
             </h1>
 
-            <motion.h1 variants={fadeUp} className='relative text-2xl md:text-4xl lg:text-5xl font-bold leading-[1.40]'>
+            <motion.h1
+              variants={fadeUp}
+              className='relative text-2xl md:text-4xl lg:text-5xl font-bold leading-[1.40]'>
               <span className='relative'>
                 {heroData.appName}
                 <svg
@@ -105,22 +107,23 @@ export default function Hero({ data }: HeroProps) {
               </span>
             </motion.h1>
 
-            <motion.p variants={fadeUp} className='text-[#B5BBBB] my-6 text-base md:text-[22px] md:leading-[40px] pr-4 max-w-2xl'>
+            <motion.p
+              variants={fadeUp}
+              className='text-[#B5BBBB] my-6 text-base md:text-[22px] md:leading-[40px] pr-4 max-w-lg'>
               {heroData.description}
             </motion.p>
           </div>
 
           {/* store badges */}
-          <motion.div variants={fadeUp} className="flex gap-5 pt-4">
+          <motion.div variants={fadeUp} className='flex gap-5 pt-4'>
             <motion.div
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
-              transition={{ type: "tween", duration: 0.12, ease: EASE }}
-            >
+              transition={{ type: "tween", duration: 0.12, ease: EASE }}>
               <Image
                 src={appStoreSvg}
                 priority
-                alt="app-store"
+                alt='app-store'
                 width={150}
                 height={50}
                 style={{ width: "150px", height: "auto" }}
@@ -129,12 +132,11 @@ export default function Hero({ data }: HeroProps) {
             <motion.div
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
-              transition={{ type: "tween", duration: 0.12, ease: EASE }}
-            >
+              transition={{ type: "tween", duration: 0.12, ease: EASE }}>
               <Image
                 src={playStoreSvg}
                 priority
-                alt="play-store"
+                alt='play-store'
                 width={150}
                 height={50}
                 style={{ width: "150px", height: "auto" }}

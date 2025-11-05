@@ -15,32 +15,32 @@ async function VirtualCardBanner() {
 
   return (
     <div className='py-4 md:py-12 lg:py-14 px-4'>
-      <MotionWrapper as="div" variants={{
-        hidden: { opacity: 1 },
-        show: {
-          opacity: 1,
-          transition: { staggerChildren: 0.14, delayChildren: 0.06 },
-        },
-      }} initial="hidden"
-        whileInView="show"
+      <MotionWrapper
+        as='div'
+        variants={{
+          hidden: { opacity: 1 },
+          show: {
+            opacity: 1,
+          },
+        }}
+        initial='hidden'
+        whileInView='show'
         viewport={{ once: true, amount: 0.3 }}>
         <div className='max-w-7xl px-4 relative mx-auto bg-[#0A1B1B] rounded-4xl grid grid-cols-1  md:grid-cols-2 flex-col-reverse gap-4 items-center'>
           {/* Left: layered cards + glows */}
-          <MotionWrapper as="div" variants={{
-            hidden: {},
-            show: { transition: { staggerChildren: 0.12 } },
-          }}>
+          <MotionWrapper as='div'>
             <div className='col-span-1 order-2 md:order-1 relative h-full  min-h-[400px]'>
               {/* top card */}
-              <MotionWrapper variants={{
-                hidden: { opacity: 0, y: -20, scale: 0.96 },
-                show: {
-                  opacity: 1,
-                  y: 0,
-                  scale: 1,
-                  transition: { type: "tween", duration: 0.55, ease: EASE },
-                },
-              }}
+              <MotionWrapper
+                variants={{
+                  hidden: { opacity: 0, y: -20, scale: 0.96 },
+                  show: {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    transition: { type: "tween", duration: 0.55, ease: EASE },
+                  },
+                }}
                 animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: EASE }}>
                 <Image
@@ -53,18 +53,7 @@ async function VirtualCardBanner() {
               </MotionWrapper>
 
               {/* bottom card */}
-              <MotionWrapper variants={{
-                hidden: { opacity: 0, y: 24, scale: 0.98 },
-                show: {
-                  opacity: 1,
-                  y: 0,
-                  scale: 1,
-                  transition: { type: "tween", duration: 0.6, ease: EASE, delay: 0.05 },
-                },
-              }}
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: EASE }}>
-
+              <MotionWrapper>
                 <Image
                   className='z-20 absolute bottom-0'
                   src={virtualCardData.cardImages.secondaryCard.asset.url}
