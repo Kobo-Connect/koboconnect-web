@@ -1,5 +1,5 @@
+"use client"
 import React from "react";
-import Phone from "@/assets/images/Phone.png";
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
 
@@ -71,8 +71,7 @@ function WhatIsKoboConnect({ aboutPageData }: WhatIsKoboConnectProps) {
   const { whatIsKoboSection } = aboutPageData;
   return (
     <div>
-      <div className='max-w-6xl mx-auto mt-8 sm:mt-10 lg:mt-12 px-4'>
-
+      <div className='max-w-7xl mx-auto mt-8 sm:mt-10 lg:mt-12 px-4'>
         <motion.div variants={container}
           initial="hidden"
           whileInView="show"

@@ -32,7 +32,7 @@ export default function AboutHero({ aboutPageData }: AboutHeroProps) {
   const { heroSection } = aboutPageData;
 
   return (
-    <div className='h-[40vh] flex flex-col justify-center items-center relative max-w-6xl mx-auto'>
+    <div className='h-[40vh] flex flex-col justify-center items-center relative max-w-7xl mx-auto'>
       <Image
         src={heroSection.backgroundImage.asset.url}
         alt={heroSection.backgroundImage.alt}

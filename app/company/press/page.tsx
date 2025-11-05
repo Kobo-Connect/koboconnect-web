@@ -28,6 +28,8 @@ async function page() {
   // Fetch press page data from Sanity
   const pressPageData = await client.fetch(PRESS_PAGE_DATA_QUERY);
 
+  console.log(pressPageData, "pressPageData")
+
   return (
     <div>
       <Header
@@ -53,7 +55,7 @@ async function page() {
           <RecentArticle pressPageData={pressPageData} />
         </MotionWrapper>
 
-        <Divider />
+        <Divider className="mx-auto max-w-6xl" />
 
         {/* Trending Articles Section */}
         <MotionWrapper variants={sectionScrollUp}>

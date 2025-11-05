@@ -33,21 +33,13 @@ interface BuiltInAfricaProps {
   aboutPageData: AboutPageData;
 }
 
-// Fallback data
-const PILL_ITEMS: Pill[] = [
-  { text: "Offline-friendly (USSD + agent networks)" },
-  { text: "Financially inclusive" },
-  { text: "Designed with cultural relevance" },
-  { text: "Locally integrated and scalable" },
-];
-
 export default function BuiltInAfrica({ aboutPageData }: BuiltInAfricaProps) {
   const { builtInAfricaSection } = aboutPageData;
   return (
     <section className='relative'>
       {/* Dark band */}
       <div className='bg-[#0A1B1B] text-white h-[690px] lg:h-[772px]'>
-        <div className='mx-auto max-w-6xl px-4 pt-[90px] lg:pt-[107px]'>
+        <div className='mx-auto max-w-7xl px-4 pt-[90px] lg:pt-[107px]'>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16'>
             {/* Left copy */}
             <div className='max-w-xl'>

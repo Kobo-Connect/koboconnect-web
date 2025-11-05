@@ -114,12 +114,12 @@ async function TrendingArticle({ pressPageData }: TrendingArticleProps) {
     };
 
   // if the section is not shown or there are no articles, return null
-  if (!config.showSection || !articles.length) {
+  if (!config.showSection) {
     return null;
   }
 
   return (
-    <div className='max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-6 gap-4 lg:gap-8'>
+    <div className='max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-6 gap-4 lg:gap-8'>
 
       <MotionWrapper variants={section}
         initial="hidden"

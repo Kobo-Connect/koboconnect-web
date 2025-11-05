@@ -87,11 +87,6 @@ function Hero({ pressPageData }: { pressPageData: any }) {
         </h2>
         <p className='text-lg text-[#EBFFFF]'>{heroSection.subtitle}</p>
       </MotionWrapper>
-
-      {/* Gradient overlay */}
-      <MotionWrapper variants={heroGradientV}>
-        <div className='w-full h-full bg-gradient-to-r from-black/60 to-black/40 rounded-2xl absolute z-0' />
-      </MotionWrapper>
     </MotionWrapper>
   );
 }

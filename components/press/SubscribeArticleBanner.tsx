@@ -119,10 +119,10 @@ function SubscribeArticleBanner({
               transition={{ type: "tween", duration: 0.12, ease: EASE }}>
               <Input
                 variant='unstyled'
-                className='placeholder:text-[#ABCCC4]'
+                className='w-full placeholder:text-[#ABCCC4]'
                 style={{
                   borderBottom: "1px solid #FFFFFF4D",
-                  width: "70%",
+                  width: "100%",
                   color: "#FFFFFF",
                 }}
                 placeholder={config.placeholderText}

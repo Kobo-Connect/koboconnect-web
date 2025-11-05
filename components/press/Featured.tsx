@@ -24,15 +24,15 @@ function Featured({ pressPageData }: { pressPageData: any }) {
   };
 
   return (
-    <div className='max-w-7xl mx-auto'>
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 items-center'>
+    <div className='max-w-6xl mx-auto py-4'>
+      <div className='flex flex-col-reverse md:flex-row gap-4 md:gap-8 lg:gap-12 items-center'>
         <div>
           <MotionWrapper variants={featureImageV}>
             <Image
               src={urlFor(heroSection.featuredArticle.featuredImage).url()}
               alt={heroSection.featuredArticle.featuredImage.alt}
-              width={500}
-              height={500}
+              width={900}
+              height={600}
               className='object-cover rounded-xl'
             />
           </MotionWrapper>
@@ -56,10 +56,10 @@ function Featured({ pressPageData }: { pressPageData: any }) {
                 </p>
               </div>
             </Badge>
-            <h4 className='text-2xl font-semibold'>
+            <h4 className='text-2xl font-semibold my-2'>
               {heroSection.featuredArticle.title}
             </h4>
-            <p>{heroSection.featuredArticle.description}</p>
+            <p className='my-2'>{heroSection.featuredArticle.description}</p>
 
             <Button
               variant='subtle'
