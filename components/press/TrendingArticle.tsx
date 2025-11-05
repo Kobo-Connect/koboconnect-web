@@ -119,14 +119,14 @@ async function TrendingArticle({ pressPageData }: TrendingArticleProps) {
   }
 
   return (
-    <div className='max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-6 gap-4 lg:gap-8'>
+    <div className='max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-6 gap-4 md:gap-8 lg:gap-16'>
 
       <MotionWrapper variants={section}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.35 }} className='mb-4 col-span-1 lg:col-span-2 space-y-2'>
         {/* Header */}
-        <MotionWrapper variants={header} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.35 }}>
+        <MotionWrapper variants={header} initial="hidden" whileInView="show" className="space-y-2" viewport={{ once: true, amount: 0.35 }}>
           <h6 className='text-[#009A74] text-lg font-medium'>
             {config.badgeText}
           </h6>
