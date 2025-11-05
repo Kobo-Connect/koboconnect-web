@@ -1,6 +1,28 @@
 import React from "react";
 import Image from "next/image";
 import { urlFor } from "@/lib/sanity/image";
+import { type Variants } from "framer-motion";
+import MotionWrapper from "../shared/MotionWrapper";
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+const heroBgV: Variants = {
+  hidden: { opacity: 0, scale: 1.03 },
+  show: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: EASE } },
+};
+
+const heroGradientV: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 0.9,
+    transition: { duration: 0.6, ease: EASE, delay: 0.15 },
+  },
+};
+
+const heroTextV: Variants = {
+  hidden: { opacity: 0, y: 14 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
+};
 
 function Hero({ pressPageData }: { pressPageData: any }) {
   // Fallback data if Sanity data is not available
@@ -13,17 +35,21 @@ function Hero({ pressPageData }: { pressPageData: any }) {
   };
 
   return (
-    <div className='h-[40vh] flex flex-col justify-center items-center relative max-w-6xl mx-auto'>
+    <MotionWrapper as="div" variants={heroBgV}
+      className='h-[40vh] flex flex-col justify-center items-center relative max-w-7xl mx-auto'>
       {heroSection.backgroundImage ? (
-        <Image
-          src={urlFor(heroSection.backgroundImage)
-            .width(1200)
-            .height(600)
-            .url()}
-          alt={heroSection.backgroundImage.alt || "Press background"}
-          fill
-          className='object-cover rounded-2xl'
-        />
+        <MotionWrapper variants={heroBgV}>
+          <Image
+            src={urlFor(heroSection.backgroundImage)
+              .width(1200)
+              .height(600)
+              .url()}
+            alt={heroSection.backgroundImage.alt || "Press background"}
+            fill
+            className='object-cover rounded-2xl absolute inset-0 z-0'
+          />
+        </MotionWrapper>
+
       ) : (
         <div className='w-full h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl' />
       )}
@@ -54,15 +80,19 @@ function Hero({ pressPageData }: { pressPageData: any }) {
         />
       </svg>
 
-      <div className='z-10 text-white absolute text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+      <MotionWrapper as="div" variants={heroTextV}
+        className='z-10 text-white absolute text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
         <h2 className='text-2xl md:text-5xl font-semibold mb-4'>
           {heroSection.title}
         </h2>
         <p className='text-lg text-[#EBFFFF]'>{heroSection.subtitle}</p>
-      </div>
+      </MotionWrapper>
 
-      <div className='w-full h-full bg-gradient-to-r from-black/60 to-black/40 rounded-2xl absolute z-0' />
-    </div>
+      {/* Gradient overlay */}
+      <MotionWrapper variants={heroGradientV}>
+        <div className='w-full h-full bg-gradient-to-r from-black/60 to-black/40 rounded-2xl absolute z-0' />
+      </MotionWrapper>
+    </MotionWrapper>
   );
 }
 

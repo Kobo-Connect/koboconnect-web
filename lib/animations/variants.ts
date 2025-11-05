@@ -57,3 +57,8 @@ export const imageReveal: Variants = {
     hidden: { opacity: 0, scale: 1.02 },
     show: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: EASE } },
 };
+
+export const sectionScrollUp: Variants = {
+    hidden: { opacity: 0, y: 12 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
+};

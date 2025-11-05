@@ -1,5 +1,7 @@
 "use client";
+import { EASE } from "@/lib/animations/variants";
 import { Button } from "@mantine/core";
+import { Variants, motion } from "framer-motion";
 import React from "react";
 
 export interface ICurrentVacancy {
@@ -20,6 +22,16 @@ export interface ICurrentVacancy {
     period: string;
   };
 }
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 18, scale: 0.98 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { type: "tween", duration: 0.45, ease: EASE },
+  },
+};
 
 function CurrentVacancy({ item }: { item: ICurrentVacancy }) {
   const handleApply = () => {
@@ -45,7 +57,9 @@ function CurrentVacancy({ item }: { item: ICurrentVacancy }) {
   };
 
   return (
-    <div className='gap-4 bg-white shadow-sm rounded-2xl p-4 md:p-5 hover:shadow-md transition-shadow duration-200'>
+    <motion.article variants={cardVariants}
+      whileHover={{ y: -3 }}
+      transition={{ type: "spring", stiffness: 260, damping: 22 }} className='gap-4 bg-white shadow-sm rounded-2xl p-4 md:p-5 hover:shadow-md transition-shadow duration-200'>
       <div className='mb-8'>
         <div className='flex items-center gap-2 mb-4'>
           <svg
@@ -176,15 +190,21 @@ function CurrentVacancy({ item }: { item: ICurrentVacancy }) {
           </svg>
           <h6 className='text-sm text-gray-500'>{item.date}</h6>
         </div>
-        <Button
-          variant='filled'
-          color={"#009A74"}
-          onClick={handleApply}
-          className='hover:bg-[#007a5c] transition-colors duration-200'>
-          Apply
-        </Button>
+
+        <motion.div whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          transition={{ type: "tween", duration: 0.15, ease: EASE }}>
+          <Button
+            variant='filled'
+            color={"#009A74"}
+            onClick={handleApply}
+            className='hover:bg-[#007a5c] transition-colors duration-200'>
+            Apply
+          </Button>
+        </motion.div>
+
       </div>
-    </div>
+    </motion.article>
   );
 }
 

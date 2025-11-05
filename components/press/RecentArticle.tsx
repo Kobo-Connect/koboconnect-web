@@ -1,47 +1,10 @@
-import React from "react";
 import Image from "next/image";
 import { Button } from "@mantine/core";
 import { IconArrowRight } from "@tabler/icons-react";
 import { urlFor } from "@/lib/sanity/image";
-import { client } from "@/lib/sanity/client";
-import { RECENT_ARTICLES_QUERY } from "@/lib/sanity/queries/articles";
 import { Variants } from "framer-motion";
 import MotionWrapper from "../shared/MotionWrapper";
-
-interface Article {
-  _id: string;
-  title: string;
-  slug: {
-    current: string;
-  };
-  description: string;
-  featuredImage: {
-    asset: {
-      _id: string;
-      url: string;
-      metadata: {
-        dimensions: {
-          width: number;
-          height: number;
-        };
-      };
-    };
-    alt: string;
-  };
-  category: {
-    _id: string;
-    title: string;
-    slug: {
-      current: string;
-    };
-    color: string;
-    backgroundColor: string;
-  };
-  author: string;
-  publishedAt: string;
-  readTime: number;
-  tags?: string[];
-}
+import { Article } from "@/lib/types/article";
 
 interface RecentArticleConfig {
   title: string;
@@ -94,9 +57,7 @@ const imageReveal: Variants = {
   show: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: EASE } },
 };
 
-async function RecentArticle({ pressPageData }: RecentArticleProps) {
-  // fetch articles from sanity
-  const articles = await client.fetch(RECENT_ARTICLES_QUERY);
+function RecentArticle({ pressPageData }: RecentArticleProps) {
 
   // config for the section from sanity or render default fallback
   const config: RecentArticleConfig = pressPageData?.recentArticlesSection || {
@@ -107,7 +68,7 @@ async function RecentArticle({ pressPageData }: RecentArticleProps) {
   };
 
   // if the section is not shown or there are no articles, return null
-  if (!config.showSection || !articles.length) {
+  if (!config.showSection) {
     return null;
   }
 
@@ -128,7 +89,7 @@ async function RecentArticle({ pressPageData }: RecentArticleProps) {
         {/* Cards Grid */}
         <MotionWrapper variants={grid} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.35 }}>
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8'>
-            {articles.slice(0, config.limit).map((article: Article) => (
+            {pressPageData?.recentArticlesSection?.articles.slice(0, config.limit).map((article: Article) => (
               <RecentArticleCard key={article._id} article={article} />
             ))}
           </div>

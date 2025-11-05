@@ -12,6 +12,7 @@ import Hero from "@/components/press/Hero";
 import Featured from "@/components/press/Featured";
 import { type Variants } from "framer-motion";
 import MotionWrapper from "@/components/shared/MotionWrapper";
+import { sectionScrollUp } from "@/lib/animations/variants";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -43,21 +44,31 @@ async function page() {
         <Hero pressPageData={pressPageData} />
 
         {/* Featured Article Section */}
-        <Featured pressPageData={pressPageData} />
+        <MotionWrapper variants={sectionScrollUp}>
+          <Featured pressPageData={pressPageData} />
+        </MotionWrapper>
 
         {/* Recent Articles Section */}
-        <RecentArticle pressPageData={pressPageData} />
+        <MotionWrapper variants={sectionScrollUp}>
+          <RecentArticle pressPageData={pressPageData} />
+        </MotionWrapper>
 
-        <Divider className='max-w-6xl mx-auto' />
+        <Divider />
 
         {/* Trending Articles Section */}
-        <TrendingArticle pressPageData={pressPageData} />
+        <MotionWrapper variants={sectionScrollUp}>
+          <TrendingArticle pressPageData={pressPageData} />
+        </MotionWrapper>
 
         {/* Insider Tips Section */}
-        <InsiderTipAndTricks pressPageData={pressPageData} />
+        <MotionWrapper variants={sectionScrollUp}>
+          <InsiderTipAndTricks pressPageData={pressPageData} />
+        </MotionWrapper>
 
         {/* Subscribe Section */}
-        <SubscribeArticleBanner pressPageData={pressPageData} />
+        <MotionWrapper variants={sectionScrollUp}>
+          <SubscribeArticleBanner pressPageData={pressPageData} />
+        </MotionWrapper>
       </MotionWrapper>
     </div>
   );

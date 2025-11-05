@@ -32,12 +32,12 @@ function Hero({ careersPageData }: HeroProps) {
   const { heroSection } = careersPageData;
 
   return (
-    <div className="h-[40vh] flex flex-col justify-center items-center relative max-w-6xl mx-auto">
-      <Image 
-        src={heroSection.backgroundImage.asset.url} 
-        alt={heroSection.backgroundImage.alt} 
-        fill 
-        className="object-cover rounded-2xl" 
+    <div className="h-[40vh] flex flex-col justify-center items-center relative max-w-7xl mx-auto">
+      <Image
+        src={heroSection.backgroundImage.asset.url}
+        alt={heroSection.backgroundImage.alt}
+        fill
+        className="object-cover rounded-2xl"
       />
 
       <svg width="52" className="z-10 absolute top-10 left-10 md:left-20 lg:left-40" height="40" viewBox="0 0 52 40" fill="none" xmlns="http://www.w3.org/2000/svg">
