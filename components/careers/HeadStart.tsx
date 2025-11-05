@@ -66,11 +66,14 @@ interface HeadStartProps {
 function HeadStart({ careersPageData }: HeadStartProps) {
   const { cultureSection } = careersPageData;
   return (
-    <div className='max-w-7xl mx-auto px-4 space-y-4 md:space-y-12 lg:space-y-16'>
-      <MotionWrapper as="div" variants={headerVariants}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.4 }} className='flex flex-col gap-2 max-w-sm'>
+    <div className='max-w-6xl mx-auto px-4 space-y-4 md:space-y-12 lg:space-y-16'>
+      <MotionWrapper
+        as='div'
+        variants={headerVariants}
+        initial='hidden'
+        whileInView='show'
+        viewport={{ once: true, amount: 0.4 }}
+        className='flex flex-col gap-2 max-w-sm'>
         <h6 className='text-[#009A74] text-lg md:text-xl'>
           {cultureSection.subtitle || "Head Start"}
         </h6>
@@ -80,17 +83,21 @@ function HeadStart({ careersPageData }: HeadStartProps) {
       </MotionWrapper>
 
       {/* Image masonry block (wrapped for animation without touching the component) */}
-      <MotionWrapper as="div" variants={blockVariants}
-        initial="hidden"
-        whileInView="show"
+      <MotionWrapper
+        as='div'
+        variants={blockVariants}
+        initial='hidden'
+        whileInView='show'
         viewport={{ once: true, amount: 0.4 }}>
         <ImageMansory sanityImages={cultureSection.cultureImages} />
       </MotionWrapper>
 
-      <MotionWrapper variants={textVariants}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.4 }} className='max-w-5xl'>
+      <MotionWrapper
+        variants={textVariants}
+        initial='hidden'
+        whileInView='show'
+        viewport={{ once: true, amount: 0.4 }}
+        className='max-w-5xl'>
         <p className='text-[#363E3F] text-base md:text-lg'>
           {cultureSection.description}
         </p>

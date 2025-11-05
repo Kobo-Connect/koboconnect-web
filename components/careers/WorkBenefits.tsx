@@ -63,13 +63,13 @@ function WorkBenefits({ careersPageData }: WorkBenefitsProps) {
   const benefitsList =
     benefitsSection.benefits && benefitsSection.benefits.length > 0
       ? benefitsSection.benefits.map((benefit) => ({
-        title: benefit.title,
-        description: benefit.description,
-        icon: benefit.icon.asset.url,
-      }))
+          title: benefit.title,
+          description: benefit.description,
+          icon: benefit.icon.asset.url,
+        }))
       : [];
   return (
-    <div className='max-w-7xl mx-auto'>
+    <div className='max-w-6xl mx-auto'>
       {benefitsSection.title && (
         <div className='mb-8'>
           <h6 className='text-[#009A74]'>Benefits</h6>
@@ -82,19 +82,24 @@ function WorkBenefits({ careersPageData }: WorkBenefitsProps) {
         </div>
       )}
 
-      <MotionWrapper variants={container}
-        initial="hidden"
-        whileInView="show"
+      <MotionWrapper
+        variants={container}
+        initial='hidden'
+        whileInView='show'
         viewport={{ once: true, amount: 0.3 }}>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8'>
           {benefitsList.map((item, index) => (
-            <MotionWrapper as="div" key={index}
+            <MotionWrapper
+              as='div'
+              key={index}
               variants={itemVariant}
               whileHover={{ y: -3 }}
-              transition={{ type: "spring", stiffness: 260, damping: 20 }} className='flex items-start gap-4'>
-              <MotionWrapper whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 260, damping: 20 }}
+              className='flex items-start gap-4'>
+              <MotionWrapper
+                whileHover={{ scale: 1.05 }}
                 transition={{ type: "tween", duration: 0.25 }}
-                className="flex-shrink-0">
+                className='flex-shrink-0'>
                 <Image
                   src={typeof item.icon === "string" ? item.icon : item.icon}
                   alt='icon'

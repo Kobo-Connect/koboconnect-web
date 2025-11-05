@@ -40,12 +40,17 @@ const headerVariants: Variants = {
   },
 };
 
-
-function CurrentVacancies({ careersPageData }: CurrentVacanciesProps) {
+async function CurrentVacancies({ careersPageData }: CurrentVacanciesProps) {
   const { openPositionsSection } = careersPageData;
 
+  if (!openPositionsSection.showSection) {
+    return null;
+  }
+
+  const openPositions = await client.fetch(OPEN_POSITIONS_QUERY);
+
   // Transform job positions to match the component's expected format
-  const currentVacanciesList: ICurrentVacancy[] = openPositionsSection.positions.map(
+  const currentVacanciesList: ICurrentVacancy[] = openPositions.map(
     (position: any) => ({
       title: position.title,
       location: position.location,
@@ -65,29 +70,31 @@ function CurrentVacancies({ careersPageData }: CurrentVacanciesProps) {
     })
   );
 
-  if (!openPositionsSection.showSection) {
-    return null;
-  }
   return (
     <div className=' bg-[#F9FCFC] py-6 md:py-16 lg:py-24'>
-      <div className='max-w-7xl mx-auto'>
-        <MotionWrapper as="div" variants={headerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.35 }} className='mb-8'>
-          <h6 className='text-[#009A74]'>
+      <div className='max-w-6xl mx-auto'>
+        <MotionWrapper
+          as='div'
+          variants={headerVariants}
+          initial='hidden'
+          whileInView='show'
+          viewport={{ once: true, amount: 0.35 }}
+          className='mb-8'>
+          <h6 className='text-[#009A74] font-medium text-lg'>
             {openPositionsSection.title || "Our current vacancies"}
           </h6>
           {openPositionsSection.subtitle && (
-            <p className='text-[#363E3F] mt-2'>
+            <h2 className='text-[#363E3F] mt-2 text-2xl lg:text-4xl font-semibold'>
               {openPositionsSection.subtitle}
-            </p>
+            </h2>
           )}
         </MotionWrapper>
 
-        <MotionWrapper as="div" variants={sectionVariants}
-          initial="hidden"
-          whileInView="show"
+        <MotionWrapper
+          as='div'
+          variants={sectionVariants}
+          initial='hidden'
+          whileInView='show'
           viewport={{ once: true, amount: 0.35 }}>
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6'>
             {currentVacanciesList.length > 0 ? (

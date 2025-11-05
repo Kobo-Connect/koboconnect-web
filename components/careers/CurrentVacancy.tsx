@@ -3,7 +3,7 @@ import { EASE } from "@/lib/animations/variants";
 import { Button } from "@mantine/core";
 import { Variants, motion } from "framer-motion";
 import React from "react";
-
+import { format } from "timeago.js";
 export interface ICurrentVacancy {
   title: string;
   location: string;
@@ -57,9 +57,11 @@ function CurrentVacancy({ item }: { item: ICurrentVacancy }) {
   };
 
   return (
-    <motion.article variants={cardVariants}
+    <motion.article
+      variants={cardVariants}
       whileHover={{ y: -3 }}
-      transition={{ type: "spring", stiffness: 260, damping: 22 }} className='gap-4 bg-white shadow-sm rounded-2xl p-4 md:p-5 hover:shadow-md transition-shadow duration-200'>
+      transition={{ type: "spring", stiffness: 260, damping: 22 }}
+      className='gap-4 bg-white shadow-md rounded-2xl p-4 md:p-5 hover:shadow-lg transition-shadow duration-200'>
       <div className='mb-8'>
         <div className='flex items-center gap-2 mb-4'>
           <svg
@@ -84,16 +86,7 @@ function CurrentVacancy({ item }: { item: ICurrentVacancy }) {
 
         <h2 className='text-lg lg:text-xl font-semibold mb-2'>{item.title}</h2>
 
-        <div className='flex items-center gap-2 mb-2'>
-          <span className='px-2 py-1 bg-[#009A74] text-white text-xs rounded-full'>
-            {item.employmentType}
-          </span>
-          <span className='px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full'>
-            {item.experienceLevel}
-          </span>
-        </div>
-
-        <p className='text-base mb-2'>
+        <p className='text-base mb-2 text-[#363E3F]'>
           {item.description.slice(0, 100)}{" "}
           {item.description.length > 100 ? "..." : ""}
         </p>
@@ -188,10 +181,11 @@ function CurrentVacancy({ item }: { item: ICurrentVacancy }) {
               strokeLinejoin='round'
             />
           </svg>
-          <h6 className='text-sm text-gray-500'>{item.date}</h6>
+          <h6 className='text-sm text-[#363E3F]'>{format(item.date)}</h6>
         </div>
 
-        <motion.div whileHover={{ scale: 1.02 }}
+        <motion.div
+          whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           transition={{ type: "tween", duration: 0.15, ease: EASE }}>
           <Button
@@ -202,7 +196,6 @@ function CurrentVacancy({ item }: { item: ICurrentVacancy }) {
             Apply
           </Button>
         </motion.div>
-
       </div>
     </motion.article>
   );

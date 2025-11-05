@@ -28,8 +28,6 @@ async function page() {
   // Fetch press page data from Sanity
   const pressPageData = await client.fetch(PRESS_PAGE_DATA_QUERY);
 
-  console.log(pressPageData, "pressPageData")
-
   return (
     <div>
       <Header
@@ -38,10 +36,13 @@ async function page() {
         logo={<Image src={logo} alt='Logo' width={100} height={100} />}
       />
 
-      <MotionWrapper as="div" variants={pageV}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.15 }} className='mb-16 space-y-4 md:space-y-12 lg:space-y-24 px-4'>
+      <MotionWrapper
+        as='div'
+        variants={pageV}
+        initial='hidden'
+        whileInView='show'
+        viewport={{ once: true, amount: 0.15 }}
+        className='mb-16 space-y-4 md:space-y-12 lg:space-y-24 px-4'>
         {/* Hero Section */}
         <Hero pressPageData={pressPageData} />
 
@@ -55,7 +56,7 @@ async function page() {
           <RecentArticle pressPageData={pressPageData} />
         </MotionWrapper>
 
-        <Divider className="mx-auto max-w-6xl" />
+        <Divider className='mx-auto max-w-6xl' />
 
         {/* Trending Articles Section */}
         <MotionWrapper variants={sectionScrollUp}>

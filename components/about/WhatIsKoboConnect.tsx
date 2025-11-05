@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
@@ -36,7 +36,6 @@ interface WhatIsKoboConnectProps {
   aboutPageData: AboutPageData;
 }
 
-
 // Easing
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -71,17 +70,23 @@ function WhatIsKoboConnect({ aboutPageData }: WhatIsKoboConnectProps) {
   const { whatIsKoboSection } = aboutPageData;
   return (
     <div>
-      <div className='max-w-7xl mx-auto mt-8 sm:mt-10 lg:mt-12 px-4'>
-        <motion.div variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.3 }} className='grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-4 items-center'>
+      <div className='max-w-6xl mx-auto mt-8 sm:mt-10 lg:mt-12 px-4'>
+        <motion.div
+          variants={container}
+          initial='hidden'
+          whileInView='show'
+          viewport={{ once: true, amount: 0.3 }}
+          className='grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-4 items-center'>
           {/* Left stats with subtle separators */}
-          <motion.div variants={fadeUp} className='order-2 lg:order-1 flex flex-col justify-center  lg:items-center'>
+          <motion.div
+            variants={fadeUp}
+            className='order-2 lg:order-1 flex flex-col justify-center  lg:items-center'>
             <div className='flex flex-row sm:flex-row lg:flex-col justify-center sm:justify-around lg:justify-end lg:space-y-6 space-x-6 sm:space-x-8 lg:space-x-0'>
               {whatIsKoboSection.stats.map((stat, index) => (
                 <React.Fragment key={index}>
-                  <motion.div variants={fadeUp} className='flex flex-col items-center lg:items-end'>
+                  <motion.div
+                    variants={fadeUp}
+                    className='flex flex-col items-center lg:items-end'>
                     <p className='text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-semibold text-[#010101]'>
                       {stat.value}
                     </p>
@@ -110,7 +115,9 @@ function WhatIsKoboConnect({ aboutPageData }: WhatIsKoboConnectProps) {
           </motion.div>
 
           {/* Center phone */}
-          <motion.div variants={scaleIn} className='order-1 lg:order-2 flex flex-col items-center justify-center'>
+          <motion.div
+            variants={scaleIn}
+            className='order-1 lg:order-2 flex flex-col items-center justify-center'>
             <div className='relative'>
               <Image
                 src={whatIsKoboSection.phoneImage.asset.url}
@@ -124,7 +131,9 @@ function WhatIsKoboConnect({ aboutPageData }: WhatIsKoboConnectProps) {
           </motion.div>
 
           {/* Right copy */}
-          <motion.div variants={fadeUp} className='order-3 space-y-4 lg:space-y-6'>
+          <motion.div
+            variants={fadeUp}
+            className='order-3 space-y-4 lg:space-y-6'>
             <p className='text-lg sm:text-xl font-medium text-[#009A74]'>
               {whatIsKoboSection.title}
             </p>

@@ -35,7 +35,7 @@ export default async function page() {
         <WorkBenefits careersPageData={careersPageData} />
 
         {/* Current Vacancies Section */}
-        {/* <CurrentVacancies careersPageData={careersPageData} /> */}
+        <CurrentVacancies careersPageData={careersPageData} />
       </div>
 
       <Footer />
