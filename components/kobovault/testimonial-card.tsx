@@ -4,7 +4,7 @@ import { Avatar, Rating } from "@mantine/core";
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 
-interface Testimonial {
+export interface Testimonial {
   name: string;
   rating: number;
   comment: string;
@@ -47,38 +47,35 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
     <motion.div
       variants={cardWrap}
-      initial="hidden"
-      whileInView="show"
+      initial='hidden'
+      whileInView='show'
       viewport={{ once: true, amount: 0.35 }}
       whileHover={{ y: -4 }}
       transition={{ type: "spring", stiffness: 240, damping: 20 }}
-      className="grid grid-cols-4 gap-4 md:gap-6"
-    >
+      className='grid grid-cols-4 gap-4 md:gap-6'>
       {/* Image */}
       <motion.div
         variants={imgReveal}
-        className="relative col-span-4 min-h-[220px] md:col-span-1 md:min-h-[200px]"
-      >
+        className='relative col-span-4 min-h-[220px] md:col-span-1 md:min-h-[200px]'>
         <Image
           src={image}
-          alt="avatar"
+          alt='avatar'
           fill
-          className="rounded-2xl object-cover"
+          className='rounded-2xl object-cover'
         />
       </motion.div>
 
       {/* Text panel */}
       <motion.div
         variants={panelReveal}
-        className="relative col-span-4 flex flex-col justify-center rounded-2xl bg-[#0A1B1B] p-4 text-white md:col-span-3 md:p-8"
-      >
-        <div className="space-y-4">
-          <em className="text-base font-medium">&quot;{comment}&quot;</em>
+        className='relative col-span-4 flex flex-col justify-center rounded-2xl bg-[#0A1B1B] p-4 text-white md:col-span-3 md:p-8'>
+        <div className='space-y-4'>
+          <em className='text-base font-medium'>&quot;{comment}&quot;</em>
 
-          <div className="flex items-center justify-between">
+          <div className='flex items-center justify-between'>
             <div>
-              <h6 className="text-base font-medium">{name}</h6>
-              <p className="text-sm font-medium">{title}</p>
+              <h6 className='text-base font-medium'>{name}</h6>
+              <p className='text-sm font-medium'>{title}</p>
             </div>
             <Rating defaultValue={rating} readOnly />
           </div>

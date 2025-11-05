@@ -4,6 +4,7 @@ import { careersSchemas } from "./careers";
 import { helpSchemas } from "./help";
 import { homeSchemas } from "./home";
 import { contactUsSchema } from "./contact-us";
+import { personalSchemas } from "./personal";
 
 export const pageSchemas = [
   ...pressSchemas,
@@ -12,4 +13,5 @@ export const pageSchemas = [
   ...helpSchemas,
   ...homeSchemas,
   ...contactUsSchema,
+  ...personalSchemas,
 ];
