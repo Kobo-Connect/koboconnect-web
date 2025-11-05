@@ -32,7 +32,7 @@ export default function Hero({ data }: { data?: HeroData }) {
   const heroUrl = data?.heroImage?.asset.url;
 
   return (
-    <div className='relative h-[75dvh]'>
+    <div className='relative h-[80dvh] mb-10'>
       <Image
         src={bgUrl || heroBg}
         priority
@@ -40,13 +40,15 @@ export default function Hero({ data }: { data?: HeroData }) {
         fill
         className='object-cover absolute inset-0 z-0'
       />
-      <div className='max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 py-4 md:py-6 px-4 relative z-10'>
-        <div className='col-span-2 max-w-2xl  py-10 text-white'>
+      <div className='max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 py-4 md:py-6 px-4 relative z-10'>
+        <div className='col-span-3 max-w-xl  py-10 text-white'>
           <div>
-            <h1 className='text-2xl md:text-5xl font-bold leading-[1.25] whitespace-pre-line'>
+            <h1 className='text-2xl md:text-5xl font-bold leading-[1.30] whitespace-pre-line tracking-wide'>
               {displayTitle}
             </h1>
-            <p className='my-6 text-sm md:text-base'>{displayDescription}</p>
+            <p className='my-6 text-sm md:text-lg text-[#FFFFFFB2]'>
+              {displayDescription}
+            </p>
           </div>
           <div className='flex gap-5 pt-4'>
             {data?.appStoreLink ? (
@@ -95,7 +97,7 @@ export default function Hero({ data }: { data?: HeroData }) {
             )}
           </div>
         </div>
-        <div className='col-span-1 min-h-[500px]'>
+        <div className='col-span-2  h-full pb-10'>
           {heroUrl ? (
             <Image
               src={heroUrl}

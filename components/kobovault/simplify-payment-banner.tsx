@@ -19,8 +19,8 @@ async function SimplifyPaymentBanner() {
   const playStoreLink = data?.buttonLink;
 
   return (
-    <div className=' py-10 md:py-14 px-4 max-w-6xl mx-auto'>
-      <div className='bg-[#0A1B1B] grid grid-cols-1 md:grid-cols-3 rounded-2xl pt-6'>
+    <div className=' py-10 md:py-14 px-4 max-w-7xl mx-auto'>
+      <div className='bg-[#0A1B1B] grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-12 rounded-2xl pt-6'>
         <div className='col-span-1 relative min-h-[300px]'>
           {imageUrl ? (
             <Image
@@ -39,13 +39,11 @@ async function SimplifyPaymentBanner() {
           )}
         </div>
 
-        <div className='px-4 py-10  col-span-1 md:col-span-2 space-y-4'>
+        <div className='px-4 py-10  col-span-1 md:col-span-2 space-y-4 max-w-2xl'>
           <h2 className=' text-2xl md:text-4xl font-semibold text-white whitespace-pre-line'>
             {title}
           </h2>
-          <p className=' text-lg font-medium text-[#B5BBBB] max-w-xl'>
-            {description}
-          </p>
+          <p className=' text-lg font-medium text-[#B5BBBB] '>{description}</p>
 
           <div className='flex gap-5 pt-4'>
             <Link href={appStoreLink || "#"}>

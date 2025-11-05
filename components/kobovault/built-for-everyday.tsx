@@ -38,7 +38,7 @@ function BuiltForEveryday({ data }: { data?: BuiltForEverydayData }) {
         ];
 
   return (
-    <div className='max-w-6xl mx-auto py-6 md:py-10 px-4 flex flex-col md:flex-row gap-8 md:gap-20 items-center'>
+    <div className='max-w-6xl mx-auto py-6 md:py-10 px-4 flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-20  items-center'>
       <div className='relative'>
         {data?.leftImage?.asset?.url ? (
           <Image

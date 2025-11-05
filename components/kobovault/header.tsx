@@ -2,7 +2,7 @@
 import { Button } from "@mantine/core";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useMemo } from "react";
 import logo from "@/assets/logo.svg";
 import Image from "next/image";
 
@@ -81,8 +81,19 @@ function DesktopHeader({ logo: sanityLogo, navLinks, ctaButton }: HeaderProps) {
   const cta = ctaButton || defaultCTA;
   const pathName = usePathname();
 
+  const isPath = useMemo(
+    () => (href: string) => {
+      if (pathName.includes(href)) {
+        return true;
+      }
+
+      return false;
+    },
+    [pathName]
+  );
+
   return (
-    <header className='max-w-6xl mx-auto flex justify-between items-center py-6 px-4'>
+    <header className='max-w-7xl mx-auto flex justify-between items-center py-6 px-4'>
       <Link href='/'>
         {sanityLogo ? (
           <Image
@@ -106,8 +117,12 @@ function DesktopHeader({ logo: sanityLogo, navLinks, ctaButton }: HeaderProps) {
         {links.map((link) => (
           <Link key={link._key || link.label} href={link.href}>
             <Button
-              variant={pathName === link.href ? "light" : "subtle"}
-              color='white'>
+              variant={isPath(link.href) ? "light" : "subtle"}
+              style={{
+                backgroundColor: isPath(link.href) ? "#122A2A" : "",
+                color: isPath(link.href) ? "#00BA8B" : "#CCE5DF",
+                fontWeight: isPath(link.href) ? 600 : 500,
+              }}>
               {link.label}
             </Button>
           </Link>
