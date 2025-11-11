@@ -15,6 +15,8 @@ import {
   getKoboVaultPersonalEveryday,
   getKoboVaultPersonalBenefits,
 } from "@/lib/sanity/queries/kobovaultPersonal";
+import MotionWrapper from "@/components/shared/MotionWrapper";
+import { sectionScrollUp } from "@/lib/animations/variants";
 
 async function page() {
   const [header, hero, totalControl, security, everyday, benefits] =
@@ -35,12 +37,54 @@ async function page() {
         ctaButton={header?.ctaButton}
       />
       <Hero data={hero as any} />
-      <TotalControl data={totalControl as any} />
-      <Security data={security as any} />
-      <BuiltForEveryday data={everyday as any} />
-      <Testimonials />
-      <MoreBenefits data={benefits as any} />
-      <SimplifyPaymentBanner />
+      <MotionWrapper
+        variants={sectionScrollUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <TotalControl data={totalControl as any} />
+      </MotionWrapper>
+      <MotionWrapper
+        variants={sectionScrollUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <Security data={security as any} />
+      </MotionWrapper>
+      <MotionWrapper
+        variants={sectionScrollUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <BuiltForEveryday data={everyday as any} />
+      </MotionWrapper>
+      <MotionWrapper
+        variants={sectionScrollUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <Testimonials />
+      </MotionWrapper>
+      <MotionWrapper
+        variants={sectionScrollUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <MoreBenefits data={benefits as any} />
+      </MotionWrapper>
+      <MotionWrapper
+        variants={sectionScrollUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <SimplifyPaymentBanner />
+      </MotionWrapper>
       <Footer />
     </main>
   );

@@ -26,41 +26,54 @@ function Featured({ pressPageData }: { pressPageData: any }) {
   return (
     <div className='max-w-6xl mx-auto py-4'>
       <div className='flex flex-col-reverse md:flex-row gap-4 md:gap-8 lg:gap-12 items-center'>
-        <div>
-          <MotionWrapper variants={featureImageV}>
-            <Image
-              src={urlFor(heroSection.featuredArticle.featuredImage).url()}
-              alt={heroSection.featuredArticle.featuredImage.alt}
-              width={900}
-              height={600}
-              className='object-cover rounded-xl'
-            />
-          </MotionWrapper>
-        </div>
+        <MotionWrapper
+          variants={featureImageV}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <Image
+            src={urlFor(heroSection.featuredArticle.featuredImage).url()}
+            alt={heroSection.featuredArticle.featuredImage.alt}
+            width={900}
+            height={600}
+            className='object-cover rounded-xl'
+          />
+        </MotionWrapper>
 
-        <div className='space-y-4'>
-          <MotionWrapper variants={featureTextV}>
-            <Badge color='#ECF8F4' size='lg'>
-              <div className='flex gap-2 items-center'>
-                <Badge
-                  variant='filled'
-                  style={{
-                    backgroundColor:
-                      heroSection.featuredArticle.category.backgroundColor,
-                    color: heroSection.featuredArticle.category.color,
-                  }}>
-                  {heroSection.featuredArticle.category.title}
-                </Badge>
-                <p className='text-[#363E3F]'>
-                  {heroSection.featuredArticle.readTime} mins read
-                </p>
-              </div>
-            </Badge>
-            <h4 className='text-2xl font-semibold my-2'>
-              {heroSection.featuredArticle.title}
-            </h4>
-            <p className='my-2'>{heroSection.featuredArticle.description}</p>
+        <MotionWrapper
+          variants={featureTextV}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          className='space-y-4'
+        >
+          <Badge color='#ECF8F4' size='lg'>
+            <div className='flex gap-2 items-center'>
+              <Badge
+                variant='filled'
+                style={{
+                  backgroundColor:
+                    heroSection.featuredArticle.category.backgroundColor,
+                  color: heroSection.featuredArticle.category.color,
+                }}>
+                {heroSection.featuredArticle.category.title}
+              </Badge>
+              <p className='text-[#363E3F]'>
+                {heroSection.featuredArticle.readTime} mins read
+              </p>
+            </div>
+          </Badge>
+          <h4 className='text-2xl font-semibold my-2'>
+            {heroSection.featuredArticle.title}
+          </h4>
+          <p className='my-2'>{heroSection.featuredArticle.description}</p>
 
+          <MotionWrapper
+            whileHover={{ x: 2 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "tween", duration: 0.12, ease: EASE }}
+          >
             <Button
               variant='subtle'
               color='#007F5E'
@@ -70,10 +83,7 @@ function Featured({ pressPageData }: { pressPageData: any }) {
               Read More
             </Button>
           </MotionWrapper>
-
-
-
-        </div>
+        </MotionWrapper>
       </div>
     </div>
   );

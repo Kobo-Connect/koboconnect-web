@@ -59,6 +59,9 @@ function CurrentVacancy({ item }: { item: ICurrentVacancy }) {
   return (
     <motion.article
       variants={cardVariants}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.3 }}
       whileHover={{ y: -3 }}
       transition={{ type: "spring", stiffness: 260, damping: 22 }}
       className='gap-4 bg-white shadow-md rounded-2xl p-4 md:p-5 hover:shadow-lg transition-shadow duration-200'>

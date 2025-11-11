@@ -61,8 +61,14 @@ function TotalControl({ data }: { data?: TotalControlData }) {
         ];
 
   return (
-    <div className='max-w-6xl mx-auto py-6 md:py-10 px-4 flex flex-col md:flex-row gap-8 md:gap-16 lg:gap-20 items-end'>
-      <div className='relative'>
+    <motion.div
+      variants={container}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.3 }}
+      className='max-w-6xl mx-auto py-6 md:py-10 px-4 flex flex-col md:flex-row gap-8 md:gap-16 lg:gap-20 items-end'
+    >
+      <motion.div variants={popUp} className='relative'>
         {data?.image?.asset?.url ? (
           <Image
             src={data.image.asset.url}
@@ -82,9 +88,9 @@ function TotalControl({ data }: { data?: TotalControlData }) {
             className='object-cover'
           />
         )}
-      </div>
+      </motion.div>
 
-      <div className='space-y-8 py-6 md:pt-14 pr-4 self-end '>
+      <motion.div variants={fadeUp} className='space-y-8 py-6 md:pt-14 pr-4 self-end '>
         <div className='space-y-4 pb-2'>
           <h2 className='text-2xl md:text-4xl font-semibold'>
             {data?.title || "Total Control Over Your Money"}
@@ -96,7 +102,13 @@ function TotalControl({ data }: { data?: TotalControlData }) {
         </div>
 
         {features.map((f, idx) => (
-          <div key={idx} className='flex gap-4 items-center'>
+          <motion.div
+            key={idx}
+            variants={fadeUp}
+            whileHover={{ x: 4 }}
+            transition={{ type: "tween", duration: 0.2 }}
+            className='flex gap-4 items-center'
+          >
             <div>
               <svg
                 width='60'
@@ -154,10 +166,10 @@ function TotalControl({ data }: { data?: TotalControlData }) {
               <h3 className='font-semibold text-lg md:text-2xl'>{f.title}</h3>
               <p className='text-sm md:text-base'>{f.description}</p>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 

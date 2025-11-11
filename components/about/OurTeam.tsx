@@ -1,6 +1,8 @@
 import React from "react";
 import { AboutPageData } from "./CoreValues";
 import Image from "next/image";
+import MotionWrapper from "../shared/MotionWrapper";
+import { fadeUp, grid, card } from "@/lib/animations/variants";
 
 function OurTeam({
   teamSection,
@@ -12,14 +14,27 @@ function OurTeam({
       {/* Team grid */}
       {teamSection.showSection && (
         <div className=''>
-          <h3 className='text-lg md:text-xl font-medium text-[#009A74]'>
-            {teamSection.title || "Meet the Team"}
-          </h3>
-          <p className='text-[#010101] max-w-md text-2xl md:text-3xl lg:text-[40px] font-semibold mt-1'>
-            {teamSection.subtitle || "The People Behind Kobo Connect"}
-          </p>
+          <MotionWrapper
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.5 }}
+          >
+            <h3 className='text-lg md:text-xl font-medium text-[#009A74]'>
+              {teamSection.title || "Meet the Team"}
+            </h3>
+            <p className='text-[#010101] max-w-md text-2xl md:text-3xl lg:text-[40px] font-semibold mt-1'>
+              {teamSection.subtitle || "The People Behind Kobo Connect"}
+            </p>
+          </MotionWrapper>
 
-          <div className='mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8'>
+          <MotionWrapper
+            variants={grid}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className='mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8'
+          >
             {teamSection.teamMembers && teamSection.teamMembers.length > 0
               ? teamSection.teamMembers.map((member, index) => {
                   const imageSrc =
@@ -41,9 +56,13 @@ function OurTeam({
                       : memberName;
 
                   return (
-                    <div
+                    <MotionWrapper
                       key={index}
-                      className='group relative overflow-hidden rounded-xl w-[290px] h-[350px] cursor-pointer'>
+                      variants={card}
+                      whileHover={{ y: -8, scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      className='group relative overflow-hidden rounded-xl w-[290px] h-[350px] cursor-pointer'
+                    >
                       {/* Image */}
                       <Image
                         src={imageSrc as string}
@@ -63,11 +82,11 @@ function OurTeam({
                           </p>
                         </div>
                       </div>
-                    </div>
+                    </MotionWrapper>
                   );
                 })
               : null}
-          </div>
+          </MotionWrapper>
         </div>
       )}
     </div>

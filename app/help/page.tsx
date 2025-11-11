@@ -6,6 +6,8 @@ import { HELP_PAGE_QUERY } from "@/lib/sanity/queries/help";
 import Hero from "@/components/help/Hero";
 import FAQAccordion from "@/components/FaqAccordion";
 import Header from "@/components/shared/header";
+import MotionWrapper from "@/components/shared/MotionWrapper";
+import { sectionScrollUp } from "@/lib/animations/variants";
 
 async function page() {
     // Fetch help page data from Sanity
@@ -22,10 +24,16 @@ async function page() {
                 {/* Hero Section */}
                 <Hero heroSection={helpPageData.heroSection} />
 
-                <div className='mt-4 mb-16 lg:mb-24 max-w-2xl mx-auto px-4'>
+                <MotionWrapper
+                    variants={sectionScrollUp}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, amount: 0.2 }}
+                    className='mt-4 mb-16 lg:mb-24 max-w-2xl mx-auto px-4'
+                >
                     {/* FAQ Section */}
                     <FAQAccordion />
-                </div>
+                </MotionWrapper>
             </div>
 
             <Footer />

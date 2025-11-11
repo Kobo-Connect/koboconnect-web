@@ -1,6 +1,8 @@
 import Image from "next/image";
 import React from "react";
 import gradientBg from "@/assets/images/gradientBg.png";
+import MotionWrapper from "../shared/MotionWrapper";
+import { fadeUp, imageReveal } from "@/lib/animations/variants";
 
 interface HeroSection {
   title: string;
@@ -33,21 +35,35 @@ export default function AboutHero({ aboutPageData }: AboutHeroProps) {
 
   return (
     <div className='h-[40vh] flex flex-col justify-center items-center relative max-w-7xl mx-auto'>
-      <Image
-        src={heroSection.backgroundImage.asset.url}
-        alt={heroSection.backgroundImage.alt}
-        fill
-        className='object-cover rounded-2xl'
-      />
+      <MotionWrapper
+        variants={imageReveal}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.3 }}
+        className="absolute inset-0"
+      >
+        <Image
+          src={heroSection.backgroundImage.asset.url}
+          alt={heroSection.backgroundImage.alt}
+          fill
+          className='object-cover rounded-2xl'
+        />
+      </MotionWrapper>
 
-      <div className='z-10 text-white absolute text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+      <MotionWrapper
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.5 }}
+        className='z-10 text-white absolute text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'
+      >
         <h2 className='text-2xl md:text-5xl font-semibold mb-4'>
           {heroSection.title}
         </h2>
         {heroSection.subtitle && (
           <p className='text-lg text-[#EBFFFF]'>{heroSection.subtitle}</p>
         )}
-      </div>
+      </MotionWrapper>
 
       <Image
         src={gradientBg}

@@ -48,7 +48,7 @@ async function OurApps() {
         {/* Copy column */}
 
         <MotionWrapper variants={section} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.35 }} className='space-y-6 md:space-y-8 pb-6 lg:pb-16 max-w-lg'>
-          <div className='space-y-2'>
+          <MotionWrapper variants={fadeUp} className='space-y-2'>
             <h3 className='text-[#009A74] font-medium text-xl '>
               {ourAppsData.subtitle}
             </h3>
@@ -58,9 +58,9 @@ async function OurApps() {
             <p className='text-lg font-medium text-[#B5BBBB]'>
               {ourAppsData.description}
             </p>
-          </div>
+          </MotionWrapper>
 
-          <div className='flex gap-6 lg:gap-8 text-white items-center pb-4 lg:pb-6'>
+          <MotionWrapper variants={fadeUp} className='flex gap-6 lg:gap-8 text-white items-center pb-4 lg:pb-6'>
             {ourAppsData.stats.map((stat, index) => (
               <React.Fragment key={index}>
                 <div>
@@ -74,21 +74,28 @@ async function OurApps() {
                 )}
               </React.Fragment>
             ))}
-          </div>
+          </MotionWrapper>
 
-          <Button
-            size='md'
-            variant='default'
-            style={{
-              backgroundColor: "#009A74",
-              color: "white",
-              borderColor: "#008E6A",
-              borderRadius: 12,
-            }}
-            component='a'
-            href={ourAppsData.buttonLink || "#"}>
-            {ourAppsData.buttonText}
-          </Button>
+          <MotionWrapper
+            variants={fadeUp}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "tween", duration: 0.12, ease: EASE }}
+          >
+            <Button
+              size='md'
+              variant='default'
+              style={{
+                backgroundColor: "#009A74",
+                color: "white",
+                borderColor: "#008E6A",
+                borderRadius: 12,
+              }}
+              component='a'
+              href={ourAppsData.buttonLink || "#"}>
+              {ourAppsData.buttonText}
+            </Button>
+          </MotionWrapper>
         </MotionWrapper>
 
 

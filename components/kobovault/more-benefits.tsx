@@ -1,4 +1,6 @@
 import React from "react";
+import MotionWrapper from "../shared/MotionWrapper";
+import { fadeUp, grid, card } from "@/lib/animations/variants";
 
 export type MoreBenefitsData = {
   title?: string;
@@ -30,7 +32,13 @@ function MoreBenefits({ data }: { data?: MoreBenefitsData }) {
 
   return (
     <div className=' mx-auto py-6 md:py-8 px-4 max-w-6xl'>
-      <div className='flex flex-col md:flex-row justify-between items-center py-6 md:py-8'>
+      <MotionWrapper
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.5 }}
+        className='flex flex-col md:flex-row justify-between items-center py-6 md:py-8'
+      >
         <h1 className='text-2xl md:text-4xl font-semibold leading-[1.25] max-w-sm mb-2'>
           {data?.title || "More Benefits From Kobo Vault"}
         </h1>
@@ -38,11 +46,23 @@ function MoreBenefits({ data }: { data?: MoreBenefitsData }) {
           {data?.subtitle ||
             "Discover the advantages of managing your finances in one secure place."}
         </p>
-      </div>
+      </MotionWrapper>
 
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-12'>
+      <MotionWrapper
+        variants={grid}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+        className='grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-12'
+      >
         {items.map((benefit, idx) => (
-          <div key={idx} className='bg-[#FAFDFE] p-4 rounded-2xl flex flex-col'>
+          <MotionWrapper
+            key={idx}
+            variants={card}
+            whileHover={{ y: -4, scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className='bg-[#FAFDFE] p-4 rounded-2xl flex flex-col'
+          >
             <svg
               width='34'
               height='34'
@@ -78,9 +98,9 @@ function MoreBenefits({ data }: { data?: MoreBenefitsData }) {
             <p className='text-base font-medium text-[#363E3F]'>
               {benefit.description}
             </p>
-          </div>
+          </MotionWrapper>
         ))}
-      </div>
+      </MotionWrapper>
     </div>
   );
 }

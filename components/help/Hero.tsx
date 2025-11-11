@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { urlFor } from "@/lib/sanity/image";
 import CustomSpotlight from "./spotlight";
+import MotionWrapper from "../shared/MotionWrapper";
+import { fadeUp, imageReveal } from "@/lib/animations/variants";
 
 interface HeroSection {
   badge: string;
@@ -38,15 +40,29 @@ function Hero({ heroSection }: HeroProps) {
   return (
     <div className='h-[50vh] relative flex flex-col justify-center items-center px-4'>
       {section.backgroundImage?.asset && (
-        <Image
-          src={urlFor(heroSection?.backgroundImage?.asset!).url()}
-          alt={heroSection?.backgroundImage?.alt!}
-          className='absolute top-0 left-0 z-0'
-          fill
-        />
+        <MotionWrapper
+          variants={imageReveal}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          className="absolute top-0 left-0 z-0"
+        >
+          <Image
+            src={urlFor(heroSection?.backgroundImage?.asset!).url()}
+            alt={heroSection?.backgroundImage?.alt!}
+            className='absolute top-0 left-0 z-0'
+            fill
+          />
+        </MotionWrapper>
       )}
 
-      <div className='text-center z-10 space-y-2 max-w-5xl mx-auto'>
+      <MotionWrapper
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.5 }}
+        className='text-center z-10 space-y-2 max-w-5xl mx-auto'
+      >
         <h6 className='text-lg font-semibold text-[#007F5E]'>
           {heroSection.badge}
         </h6>
@@ -56,11 +72,17 @@ function Hero({ heroSection }: HeroProps) {
         <p className='text-[#363E3F] lg:text-lg max-w-xl mx-auto'>
           {heroSection.subtitle}
         </p>
-      </div>
+      </MotionWrapper>
 
-      <div className='pt-10 lg:pt-16 text-center z-10 space-y-2 w-full max-w-lg mx-auto'>
+      <MotionWrapper
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.5 }}
+        className='pt-10 lg:pt-16 text-center z-10 space-y-2 w-full max-w-lg mx-auto'
+      >
         <CustomSpotlight />
-      </div>
+      </MotionWrapper>
     </div>
   );
 }
