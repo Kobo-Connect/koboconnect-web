@@ -9,6 +9,8 @@ import Hero from "@/components/careers/Hero";
 import { client } from "@/lib/sanity/client";
 import { CAREERS_PAGE_DATA_QUERY } from "@/lib/sanity/queries/careers";
 import CurrentVacancies from "@/components/careers/CurrentVacancies";
+import MotionWrapper from "@/components/shared/MotionWrapper";
+import { sectionScrollUp } from "@/lib/animations/variants";
 
 export default async function page() {
   // Fetch careers page data from Sanity
@@ -27,15 +29,43 @@ export default async function page() {
         <Hero careersPageData={careersPageData} />
 
         {/* Head Start Section */}
-        <HeadStart careersPageData={careersPageData} />
+        <MotionWrapper
+          variants={sectionScrollUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <HeadStart careersPageData={careersPageData} />
+        </MotionWrapper>
 
-        <Divider />
+        <MotionWrapper
+          variants={sectionScrollUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <Divider />
+        </MotionWrapper>
 
         {/* Work Benefits Section */}
-        <WorkBenefits careersPageData={careersPageData} />
+        <MotionWrapper
+          variants={sectionScrollUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <WorkBenefits careersPageData={careersPageData} />
+        </MotionWrapper>
 
         {/* Current Vacancies Section */}
-        <CurrentVacancies careersPageData={careersPageData} />
+        <MotionWrapper
+          variants={sectionScrollUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <CurrentVacancies careersPageData={careersPageData} />
+        </MotionWrapper>
       </div>
 
       <Footer />

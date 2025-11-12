@@ -1,5 +1,7 @@
 import Image from "next/image";
 import React from "react";
+import MotionWrapper from "../shared/MotionWrapper";
+import { card, imageReveal, fadeUp, section } from "@/lib/animations/variants";
 
 function ValueCard({
   value,
@@ -26,13 +28,25 @@ function ValueCard({
   };
 
   return (
-    <div className='flex flex-col lg:flex-row items-center gap-4 lg:gap-x-20'>
+    <MotionWrapper
+      variants={card}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.3 }}
+      className='flex flex-col lg:flex-row items-center gap-4 lg:gap-x-20'
+    >
       {/* Image */}
       <div
         className={`w-full md:w-auto md:flex-shrink-0 ${
           reverse ? "lg:order-2" : "lg:order-1"
         } mb-6 md:mb-0`}>
-        <div className='relative rounded-xl overflow-hidden w-full md:w-[480px]'>
+        <MotionWrapper
+          variants={imageReveal}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          className='relative rounded-xl overflow-hidden w-full md:w-[480px]'
+        >
           {/* green accent frame */}
           <div className='absolute -inset-3 rounded-2xl border-[6px] border-[#009A74] -z-10 hidden sm:block' />
           <Image
@@ -58,14 +72,19 @@ function ValueCard({
             sizes='(max-width: 768px) 100vw, 480px'
             priority={false}
           />
-        </div>
+        </MotionWrapper>
       </div>
 
       {/* Text */}
-      <div
+      <MotionWrapper
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.3 }}
         className={`w-4/5 lg:w-full m-auto flex-1 ${
           reverse ? "lg:order-1" : "lg:order-2"
-        } ${getSpacingClass()}`}>
+        } ${getSpacingClass()}`}
+      >
         <div className='w-full flex lg:block justify-center items-center mt-10 lg:mt-0'>
           <Image
             src={
@@ -90,8 +109,8 @@ function ValueCard({
         <p className='text-[#363E3F] leading-7 text-sm md:text-base font-normal'>
           {formatWithLineBreaks(value.description)}
         </p>
-      </div>
-    </div>
+      </MotionWrapper>
+    </MotionWrapper>
   );
 }
 
@@ -174,7 +193,13 @@ export default function CoreValues({ aboutPageData }: CoreValuesProps) {
   return (
     <section className='mx-auto px-4 py-10 md:py-16 lg:py-16 max-w-6xl'>
       {/* Section header */}
-      <div className='text-center max-w-2xl mx-auto mb-8 md:mb-16'>
+      <MotionWrapper
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.5 }}
+        className='text-center max-w-2xl mx-auto mb-8 md:mb-16'
+      >
         <h2 className='text-2xl md:text-[40px] md:leading-[44px] font-semibold text-[#010101]'>
           {valuesSection.title || "Our Core Values"}
         </h2>
@@ -182,16 +207,22 @@ export default function CoreValues({ aboutPageData }: CoreValuesProps) {
           {valuesSection.subtitle ||
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget leo ac eros facilibus finib."}
         </p>
-      </div>
+      </MotionWrapper>
 
       {/* Values list */}
-      <div className='space-y-10 md:space-y-20 lg:space-y-24'>
+      <MotionWrapper
+        variants={section}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        className='space-y-10 md:space-y-20 lg:space-y-24'
+      >
         {valuesSection.values && valuesSection.values.length > 0
           ? valuesSection.values.map((val, i) => (
               <ValueCard key={val.title} value={val} reverse={i % 2 === 1} />
             ))
           : null}
-      </div>
+      </MotionWrapper>
     </section>
   );
 }

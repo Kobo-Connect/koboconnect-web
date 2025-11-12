@@ -3,6 +3,8 @@ import heroImg from "@/assets/images/koboVaultApp.png";
 import appStoreSvg from "@/assets/appStore.svg";
 import playStoreSvg from "@/assets/playStore.svg";
 import heroBg from "@/assets/images/heroBg.png";
+import MotionWrapper from "../shared/MotionWrapper";
+import { fadeUp, imageReveal, section } from "@/lib/animations/variants";
 
 type AssetImage = {
   asset: {
@@ -33,15 +35,29 @@ export default function Hero({ data }: { data?: HeroData }) {
 
   return (
     <div className='relative h-[80dvh] mb-10'>
-      <Image
-        src={bgUrl || heroBg}
-        priority
-        alt={data?.backgroundImage?.alt || "hero-bg"}
-        fill
-        className='object-cover absolute inset-0 z-0'
-      />
-      <div className='max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 py-4 md:py-6 px-4 relative z-10'>
-        <div className='col-span-3 max-w-xl  py-10 text-white'>
+      <MotionWrapper
+        variants={imageReveal}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.3 }}
+        className="absolute inset-0"
+      >
+        <Image
+          src={bgUrl || heroBg}
+          priority
+          alt={data?.backgroundImage?.alt || "hero-bg"}
+          fill
+          className='object-cover absolute inset-0 z-0'
+        />
+      </MotionWrapper>
+      <MotionWrapper
+        variants={section}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.3 }}
+        className='max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 py-4 md:py-6 px-4 relative z-10'
+      >
+        <MotionWrapper variants={fadeUp} className='col-span-3 max-w-xl  py-10 text-white'>
           <div>
             <h1 className='text-2xl md:text-5xl font-bold leading-[1.30] whitespace-pre-line tracking-wide'>
               {displayTitle}
@@ -50,7 +66,13 @@ export default function Hero({ data }: { data?: HeroData }) {
               {displayDescription}
             </p>
           </div>
-          <div className='flex gap-5 pt-4'>
+          <MotionWrapper
+            variants={fadeUp}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "tween", duration: 0.12, ease: [0.22, 1, 0.36, 1] }}
+            className='flex gap-5 pt-4'
+          >
             {data?.appStoreLink ? (
               <a
                 href={data.appStoreLink}
@@ -95,9 +117,9 @@ export default function Hero({ data }: { data?: HeroData }) {
                 priority
               />
             )}
-          </div>
-        </div>
-        <div className='col-span-2  h-full pb-10'>
+          </MotionWrapper>
+        </MotionWrapper>
+        <MotionWrapper variants={imageReveal} className='col-span-2  h-full pb-10'>
           {heroUrl ? (
             <Image
               src={heroUrl}
@@ -115,8 +137,8 @@ export default function Hero({ data }: { data?: HeroData }) {
               priority
             />
           )}
-        </div>
-      </div>
+        </MotionWrapper>
+      </MotionWrapper>
     </div>
   );
 }

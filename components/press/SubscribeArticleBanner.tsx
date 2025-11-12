@@ -79,47 +79,63 @@ function SubscribeArticleBanner({
   }
 
   return (
-    <div className='max-w-7xl mx-auto bg-[#007F5E] rounded-2xl'>
-      <MotionWrapper variants={section}
+    <div className="max-w-7xl mx-auto bg-[#007F5E] rounded-2xl">
+      <MotionWrapper
+        variants={section}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.35 }} className='grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6'>
+        viewport={{ once: true, amount: 0.35 }}
+        className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"
+      >
         {config.image && (
-          <div className='col-span-1'>
+          <div className="col-span-1">
             {/* Left: image */}
-            <MotionWrapper variants={imgPop} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.35 }}>
-              <MotionWrapper animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: EASE }}>
+            <MotionWrapper
+              variants={imgPop}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.35 }}
+            >
+              <MotionWrapper
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: EASE }}
+              >
                 <Image
                   src={urlFor(config.image.asset).url()}
                   alt={config.image.alt}
                   width={500}
                   height={500}
-                  className='object-cover'
+                  className="object-cover"
                 />
               </MotionWrapper>
-
             </MotionWrapper>
-
           </div>
         )}
 
         {/* Right: copy + form */}
-        <div className='col-span-1 flex flex-col justify-center pr-4 max-w-md'>
-          <div className='mb-6 space-y-2'>
-            <h2 className='text-white text-2xl lg:text-3xl font-semibold'>
+        <MotionWrapper
+          variants={copyUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.35 }}
+          className="col-span-1 flex flex-col justify-center pr-4 max-w-md"
+        >
+          <div className="mb-6 space-y-2">
+            <h2 className="text-white text-2xl lg:text-3xl font-semibold">
               {config.title}
             </h2>
-            <p className='text-[#CCE5DF] text-lg'>{config.subtitle}</p>
+            <p className="text-[#CCE5DF] text-lg">{config.subtitle}</p>
           </div>
 
-          <div className='flex items-center gap-2 w-full'>
-            <MotionWrapper className="flex-1"
+          <div className="flex items-center gap-2 w-full">
+            <MotionWrapper
+              className="flex-1"
               whileFocus={{ scale: 1.005 }}
-              transition={{ type: "tween", duration: 0.12, ease: EASE }}>
+              transition={{ type: "tween", duration: 0.12, ease: EASE }}
+            >
               <Input
-                variant='unstyled'
-                className='w-full placeholder:text-[#ABCCC4]'
+                variant="unstyled"
+                className="w-full placeholder:text-[#ABCCC4]"
                 style={{
                   borderBottom: "1px solid #FFFFFF4D",
                   width: "100%",
@@ -128,15 +144,18 @@ function SubscribeArticleBanner({
                 placeholder={config.placeholderText}
               />
             </MotionWrapper>
-            <MotionWrapper whileHover={{ y: -1 }}
+            <MotionWrapper
+              whileHover={{ y: -1 }}
               whileTap={{ scale: 0.98 }}
-              transition={{ type: "tween", duration: 0.12, ease: EASE }} className='w-[30%]'>
-              <Button variant='filled' color='#009A74' fullWidth>
+              transition={{ type: "tween", duration: 0.12, ease: EASE }}
+              className="w-[30%]"
+            >
+              <Button variant="filled" color="#009A74" fullWidth>
                 {config.buttonText}
               </Button>
             </MotionWrapper>
           </div>
-        </div>
+        </MotionWrapper>
       </MotionWrapper>
     </div>
   );

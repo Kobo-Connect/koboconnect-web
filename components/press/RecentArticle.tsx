@@ -108,14 +108,25 @@ async function RecentArticle({ pressPageData }: RecentArticleProps) {
 
 function RecentArticleCard({ article }: { article: Article }) {
   return (
-    <MotionWrapper as="article" variants={card}
+    <MotionWrapper
+      as="article"
+      variants={card}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.3 }}
       whileHover={{ y: -4 }}
-      transition={{ type: "spring", stiffness: 240, damping: 20 }} >
+      transition={{ type: "spring", stiffness: 240, damping: 20 }}
+    >
       <Link href={`/press/${article.slug.current}`}>
         <div className='grid grid-rows-5 gap-4'>
           <div className='row-span-2 relative'>
             {/* Image */}
-            <MotionWrapper variants={imageReveal}>
+            <MotionWrapper
+              variants={imageReveal}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.3 }}
+            >
               <Image
                 src={urlFor(article.featuredImage.asset).url()}
                 alt={article.featuredImage.alt}

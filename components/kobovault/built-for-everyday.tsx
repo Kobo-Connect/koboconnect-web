@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 import MapSvg from "@/assets/Map.svg";
 import transactionCard from "@/assets/images/transactionCard.png";
+import MotionWrapper from "../shared/MotionWrapper";
+import { fadeUp, imageReveal, section } from "@/lib/animations/variants";
 
 export type BuiltForEverydayData = {
   title?: string;
@@ -38,8 +40,14 @@ function BuiltForEveryday({ data }: { data?: BuiltForEverydayData }) {
         ];
 
   return (
-    <div className='max-w-6xl mx-auto py-6 md:py-10 px-4 flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-20  items-center'>
-      <div className='relative'>
+    <MotionWrapper
+      variants={section}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.3 }}
+      className='max-w-6xl mx-auto py-6 md:py-10 px-4 flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-20  items-center'
+    >
+      <MotionWrapper variants={imageReveal} className='relative'>
         {data?.leftImage?.asset?.url ? (
           <Image
             src={data.leftImage.asset.url}
@@ -57,38 +65,52 @@ function BuiltForEveryday({ data }: { data?: BuiltForEverydayData }) {
             className='object-cover'
           />
         )}
-        {data?.overlayImage?.asset?.url ? (
-          <Image
-            src={data.overlayImage.asset.url}
-            alt={data.overlayImage.alt || "transaction-card"}
-            width={140}
-            height={140}
-            className='object-contain absolute bottom-3 right-0'
-          />
-        ) : (
-          <Image
-            src={transactionCard}
-            alt='transaction-card'
-            width={140}
-            height={140}
-            className='object-contain absolute bottom-3 right-0'
-          />
-        )}
-      </div>
+        <MotionWrapper
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          className="absolute bottom-3 right-0"
+        >
+          {data?.overlayImage?.asset?.url ? (
+            <Image
+              src={data.overlayImage.asset.url}
+              alt={data.overlayImage.alt || "transaction-card"}
+              width={140}
+              height={140}
+              className='object-contain'
+            />
+          ) : (
+            <Image
+              src={transactionCard}
+              alt='transaction-card'
+              width={140}
+              height={140}
+              className='object-contain'
+            />
+          )}
+        </MotionWrapper>
+      </MotionWrapper>
 
-      <div className='space-y-8 py-4 md:py-6 pr-4'>
+      <MotionWrapper variants={fadeUp} className='space-y-8 py-4 md:py-6 pr-4'>
         <div className='space-y-4 pb-2'>
           <h2 className='text-2xl md:text-4xl font-semibold text-[#010101]'>
             {data?.title || "Built for Everyday Life in Africa"}
           </h2>
           <p className='text-lg font-medium'>
             {data?.subtitle ||
-              "Whether you’re paying bills, running a business, or sending money to family, Kobo Vault works seamlessly for real people and real needs."}
+              "Whether you're paying bills, running a business, or sending money to family, Kobo Vault works seamlessly for real people and real needs."}
           </p>
         </div>
 
         {features.map((f, idx) => (
-          <div key={idx} className='flex gap-4 items-center'>
+          <MotionWrapper
+            key={idx}
+            variants={fadeUp}
+            whileHover={{ x: 4 }}
+            transition={{ type: "tween", duration: 0.2 }}
+            className='flex gap-4 items-center'
+          >
             <div>
               <svg
                 width='60'
@@ -140,10 +162,10 @@ function BuiltForEveryday({ data }: { data?: BuiltForEverydayData }) {
                 {f.description}
               </p>
             </div>
-          </div>
+          </MotionWrapper>
         ))}
-      </div>
-    </div>
+      </MotionWrapper>
+    </MotionWrapper>
   );
 }
 

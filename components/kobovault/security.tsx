@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import transactionImage from "@/assets/images/manCheckingTransaction.png";
+import MotionWrapper from "../shared/MotionWrapper";
+import { fadeUp, imageReveal, section } from "@/lib/animations/variants";
 
 type Feature = {
   title: string;
@@ -37,8 +39,14 @@ function Security({ data }: { data?: SecurityData }) {
         ];
 
   return (
-    <div className='max-w-6xl mx-auto py-6 md:py-10 px-4 flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-20 items-center'>
-      <div className='space-y-8 py-4 md:py-6 pr-4'>
+    <MotionWrapper
+      variants={section}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.3 }}
+      className='max-w-6xl mx-auto py-6 md:py-10 px-4 flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-20 items-center'
+    >
+      <MotionWrapper variants={fadeUp} className='space-y-8 py-4 md:py-6 pr-4'>
         <div className='space-y-4 pb-2'>
           <h2 className='text-2xl md:text-4xl font-semibold text-[#010101]'>
             {data?.title || "Security You Can Trust"}
@@ -49,7 +57,13 @@ function Security({ data }: { data?: SecurityData }) {
           </p>
         </div>
         {features.map((f, idx) => (
-          <div key={idx} className='flex gap-4 items-center'>
+          <MotionWrapper
+            key={idx}
+            variants={fadeUp}
+            whileHover={{ x: 4 }}
+            transition={{ type: "tween", duration: 0.2 }}
+            className='flex gap-4 items-center'
+          >
             <div>
               <svg
                 width='60'
@@ -112,11 +126,11 @@ function Security({ data }: { data?: SecurityData }) {
                 {f.description}
               </p>
             </div>
-          </div>
+          </MotionWrapper>
         ))}
-      </div>
+      </MotionWrapper>
 
-      <div className=''>
+      <MotionWrapper variants={imageReveal} className=''>
         {data?.image?.asset?.url ? (
           <Image
             src={data.image.asset.url}
@@ -134,8 +148,8 @@ function Security({ data }: { data?: SecurityData }) {
             className='object-cover'
           />
         )}
-      </div>
-    </div>
+      </MotionWrapper>
+    </MotionWrapper>
   );
 }
 

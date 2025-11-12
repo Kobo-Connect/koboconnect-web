@@ -69,7 +69,19 @@ async function GetStartedCta({ data }: GetStartedCtaProps) {
               </div>
             </MotionWrapper>
 
-            <div>
+            <MotionWrapper
+              variants={{
+                hidden: { opacity: 0, y: 10 },
+                show: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { type: "tween", duration: 0.4, ease: EASE },
+                },
+              }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "tween", duration: 0.12, ease: EASE }}
+            >
               <Button
                 variant='default'
                 style={{
@@ -81,9 +93,19 @@ async function GetStartedCta({ data }: GetStartedCtaProps) {
                 href={ctaData.buttonLink || "#"}>
                 {ctaData.buttonText}
               </Button>
-            </div>
+            </MotionWrapper>
 
-            <div className='flex items-center justify-center gap-2'>
+            <MotionWrapper
+              variants={{
+                hidden: { opacity: 0, y: 10 },
+                show: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { type: "tween", duration: 0.4, ease: EASE },
+                },
+              }}
+              className='flex items-center justify-center gap-2'
+            >
               <svg
                 width='19'
                 height='15'
@@ -97,7 +119,7 @@ async function GetStartedCta({ data }: GetStartedCtaProps) {
               </svg>
 
               <p className='text-lg font-semibold text-[#010101]'>{ctaData.footerText}</p>
-            </div>
+            </MotionWrapper>
           </div>
         </div>
       </MotionWrapper>

@@ -159,17 +159,30 @@ function TrendingArticleCard({
   badgeText: string;
 }) {
   return (
-    <MotionWrapper as="article" variants={row}
+    <MotionWrapper
+      as="article"
+      variants={row}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.3 }}
       whileHover={{ y: -3 }}
-      transition={{ type: "spring", stiffness: 240, damping: 20 }} className='grid grid-cols-5 gap-4 md:gap-6'>
-      <div className=' relative col-span-2'>
+      transition={{ type: "spring", stiffness: 240, damping: 20 }}
+      className='grid grid-cols-5 gap-4 md:gap-6'
+    >
+      <MotionWrapper
+        variants={thumbReveal}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.3 }}
+        className=' relative col-span-2'
+      >
         <Image
           src={urlFor(article.featuredImage.asset).width(300).height(200).url()}
           alt={article.featuredImage.alt}
           fill
           className='object-cover rounded-xl'
         />
-      </div>
+      </MotionWrapper>
 
       <div className='space-y-3 col-span-3'>
         <div className='flex justify-between items-center'>

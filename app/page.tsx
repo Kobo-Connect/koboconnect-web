@@ -12,6 +12,8 @@ import Faq from "@/components/home/faq";
 import GetStartedCta from "@/components/home/getstarted-cta";
 import Footer from "@/components/shared/footer";
 import { getHomePageData } from "@/lib/sanity/queries/home";
+import MotionWrapper from "@/components/shared/MotionWrapper";
+import { sectionScrollUp } from "@/lib/animations/variants";
 
 export default async function Home() {
   // Fetch home page data for Hero, KoboConnect, and Solution sections
@@ -24,14 +26,70 @@ export default async function Home() {
         logo={<Image src={logo} alt='Logo' priority width={100} height={100} />}
       />
       <Hero data={homeData?.heroSection} />
-      <KoboConnect data={homeData?.koboConnectSection} />
-      <Solution data={homeData?.solutionSection} />
-      <InnovativeApproach data={homeData?.innovativeApproach!} />
-      <OurApps />
-      <Testimonials />
-      <VirtualCardBanner />
-      <Faq faqData={homeData?.faqSection!} />
-      <GetStartedCta />
+      <MotionWrapper
+        variants={sectionScrollUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <KoboConnect data={homeData?.koboConnectSection} />
+      </MotionWrapper>
+      <MotionWrapper
+        variants={sectionScrollUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <Solution data={homeData?.solutionSection} />
+      </MotionWrapper>
+      <MotionWrapper
+        variants={sectionScrollUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <InnovativeApproach data={homeData?.innovativeApproach!} />
+      </MotionWrapper>
+      <MotionWrapper
+        variants={sectionScrollUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <OurApps />
+      </MotionWrapper>
+      <MotionWrapper
+        variants={sectionScrollUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <Testimonials />
+      </MotionWrapper>
+      <MotionWrapper
+        variants={sectionScrollUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <VirtualCardBanner />
+      </MotionWrapper>
+      <MotionWrapper
+        variants={sectionScrollUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <Faq faqData={homeData?.faqSection!} />
+      </MotionWrapper>
+      <MotionWrapper
+        variants={sectionScrollUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <GetStartedCta />
+      </MotionWrapper>
       <Footer />
     </main>
   );
