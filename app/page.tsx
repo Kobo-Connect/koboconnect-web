@@ -21,7 +21,6 @@ export default async function Home() {
     <main>
       <Header
         textColor='#CCE5DF'
-        backgroundColor="#081515"
         logo={<Image src={logo} alt='Logo' priority width={100} height={100} />}
       />
       <Hero data={homeData?.heroSection} />

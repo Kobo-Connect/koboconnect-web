@@ -39,7 +39,7 @@ function Faq({ faqData }: { faqData: FAQData }) {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.4 }}
-          className="mx-auto mb-10 max-w-2xl text-center"
+          className="mx-auto mb-10 max-w-2xl text-center px-4"
         >
           <h2 className='text-2xl text-[#010101] md:text-4xl font-semibold leading-[1.25] mb-4'>
             {faqData.title}

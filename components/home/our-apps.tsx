@@ -44,23 +44,23 @@ async function OurApps() {
 
   return (
     <div className='bg-[#0A1B1B] '>
-      <MotionWrapper className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl mx-auto pt-10 md:pt-24 lg:pt-28 px-4'>
+      <MotionWrapper className='grid grid-cols-1 md:grid-cols-2 items-center justify-center md:justify-start md:items-start gap-8 max-w-7xl mx-auto pt-10 md:pt-24 lg:pt-28 px-4'>
         {/* Copy column */}
 
         <MotionWrapper variants={section} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.35 }} className='space-y-6 md:space-y-8 pb-6 lg:pb-16 max-w-lg'>
-          <div className='space-y-2'>
-            <h3 className='text-[#009A74] font-medium text-xl '>
+          <div className='space-y-2 text-center md:text-left pb-2'>
+            <h3 className='text-[#009A74] font-medium text-base md:text-xl '>
               {ourAppsData.subtitle}
             </h3>
-            <h2 className='font-semibold text-white text-4xl leading-[1.30]'>
+            <h2 className='font-semibold text-white text-2xl md:text-4xl leading-[1.30]'>
               {ourAppsData.title}
             </h2>
-            <p className='text-lg font-medium text-[#B5BBBB]'>
+            <p className='text-base md:text-lg font-medium text-[#B5BBBB]'>
               {ourAppsData.description}
             </p>
           </div>
 
-          <div className='flex gap-6 lg:gap-8 text-white items-center pb-4 lg:pb-6'>
+          <div className='flex gap-6 lg:gap-8 text-white items-center pb-6 lg:pb-8'>
             {ourAppsData.stats.map((stat, index) => (
               <React.Fragment key={index}>
                 <div>
@@ -76,19 +76,21 @@ async function OurApps() {
             ))}
           </div>
 
-          <Button
-            size='md'
-            variant='default'
-            style={{
-              backgroundColor: "#009A74",
-              color: "white",
-              borderColor: "#008E6A",
-              borderRadius: 12,
-            }}
-            component='a'
-            href={ourAppsData.buttonLink || "#"}>
-            {ourAppsData.buttonText}
-          </Button>
+          <div className='flex justify-center md:justify-start'>
+            <Button
+              size='md'
+              variant='default'
+              style={{
+                backgroundColor: "#009A74",
+                color: "white",
+                borderColor: "#008E6A",
+                borderRadius: 12,
+              }}
+              component='a'
+              href={ourAppsData.buttonLink || "#"}>
+              {ourAppsData.buttonText}
+            </Button>
+          </div>
         </MotionWrapper>
 
 

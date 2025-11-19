@@ -420,7 +420,8 @@ function MobileDrawer({ backgroundColor, textColor, opened, close }: { backgroun
           backgroundColor: backgroundColor,
         },
         close: {
-          color: textColor
+          color: textColor,
+          marginRight: 14,
         },
         content: {
           backgroundColor: backgroundColor,

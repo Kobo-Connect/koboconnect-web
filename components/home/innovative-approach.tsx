@@ -72,7 +72,7 @@ async function InnovativeApproach({ data }: InnovativeApproachProps) {
           </div>
 
           <div>
-            <MotionWrapper as="p" variants={slideInRight} className="text-[#363E3F] font-[400] text-lg">{innovativeData.description}</MotionWrapper>
+            <MotionWrapper as="p" variants={slideInRight} className="text-[#363E3F] font-[400] text-base md:text-lg">{innovativeData.description}</MotionWrapper>
           </div>
         </div>
       </MotionWrapper>

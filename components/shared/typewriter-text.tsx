@@ -26,10 +26,9 @@ function TypewriterText({ words }: { words: string[] }) {
 
   return (
     <span
-      className="inline-block"
+      className="inline-block  text-center sm:text-left"
       style={{
         minWidth: `${longestWord.length * 0.6}em`, // Reserve space based on longest word
-        textAlign: "left",
       }}
     >
       <Typewriter

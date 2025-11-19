@@ -26,7 +26,7 @@ async function VirtualCardBanner() {
         initial='hidden'
         whileInView='show'
         viewport={{ once: true, amount: 0.3 }}>
-        <div className='max-w-7xl px-4 relative mx-auto bg-[#0A1B1B] rounded-4xl grid grid-cols-1  md:grid-cols-2 flex-col-reverse gap-4 items-center'>
+        <div className='max-w-7xl px-4 relative mx-auto bg-[#0A1B1B] rounded-4xl grid grid-cols-1  md:grid-cols-2 flex-col-reverse gap-6 items-center'>
           {/* Left: layered cards + glows */}
           <MotionWrapper as='div'>
             <div className='col-span-1 order-2 md:order-1 relative h-full  min-h-[400px]'>

@@ -36,7 +36,7 @@ async function Testimonials() {
               <h2 className='text-2xl md:text-4xl font-semibold leading-[1.25]'>
                 {testimonialsData.title}
               </h2>
-              <p className='text-base font-medium max-w-md'>
+              <p className='text-base font-[400] max-w-md'>
                 {testimonialsData.description}
               </p>
 

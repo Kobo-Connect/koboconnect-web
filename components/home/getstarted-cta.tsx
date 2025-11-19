@@ -21,7 +21,7 @@ async function GetStartedCta({ data }: GetStartedCtaProps) {
     return null;
   }
   return (
-    <div>
+    <div className="pb-6">
       <MotionWrapper variants={{
         hidden: { opacity: 0, y: 14 },
         show: {
@@ -61,15 +61,18 @@ async function GetStartedCta({ data }: GetStartedCtaProps) {
                 transition: { type: "tween", duration: 0.4, ease: EASE },
               },
             }}>
-              <div className='flex items-center justify-center py-2 text-[#010101]'>
-                <div className='flex items-center gap-2 text-lg font-medium'>
+              <div className='flex flex-col md:flex-row gap-2 items-center justify-center py-2 text-[#010101]'>
+                <div className='flex  items-center gap-2 text-lg font-medium'>
                   {ctaData.ratingText} <Rating value={ctaData.ratingValue} readOnly />{" "}
-                  {ctaData.ratingDescription}
                 </div>
+
+                <h4 className='md:text-lg font-medium text-base'>
+                  {ctaData.ratingDescription}
+                </h4>
               </div>
             </MotionWrapper>
 
-            <div>
+            <div className="pt-2 pb-6">
               <Button
                 variant='default'
                 style={{
@@ -83,7 +86,7 @@ async function GetStartedCta({ data }: GetStartedCtaProps) {
               </Button>
             </div>
 
-            <div className='flex items-center justify-center gap-2'>
+            <div className='flex flex-col md:flex-row items-center justify-center gap-2 px-6'>
               <svg
                 width='19'
                 height='15'

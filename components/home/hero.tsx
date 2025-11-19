@@ -76,10 +76,10 @@ export default function Hero({ data }: HeroProps) {
         variants={wrap}
         initial='hidden'
         animate='show'
-        className='max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between gap-4 py-4 md:py-6 lg:py-10 px-4 relative z-10'>
-        <div className='py-10 text-white max-w-2xl'>
+        className='max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center sm:items-start md:justify-between gap-4 py-4 md:py-6 lg:py-10 px-4 relative z-10'>
+        <div className='py-10 text-center sm:text-left text-white max-w-2xl'>
           <div className=''>
-            <h1 className='text-2xl md:text-3xl lg:text-5xl font-bold leading-[1.30] tracking-wide'>
+            <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.40] tracking-wide'>
               {heroData.mainTitle} {""}
               <span className='text-[#00BA8B]'>
                 <TypewriterText words={heroData.typewriterWords} />
@@ -115,7 +115,7 @@ export default function Hero({ data }: HeroProps) {
           </div>
 
           {/* store badges */}
-          <motion.div variants={fadeUp} className='flex gap-5 pt-4'>
+          <motion.div variants={fadeUp} className='flex justify-center sm:justify-start gap-5 pt-4'>
             <motion.div
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
