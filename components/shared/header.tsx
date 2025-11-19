@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@mantine/core";
+import { Accordion, Burger, Button, Drawer } from "@mantine/core";
 import NavMenu from "@/components/ui/NavMenu";
 import vaultImage from "@/assets/images/koboVault.png";
 import aboutImage from "@/assets/images/aboutUs.png";
@@ -11,6 +11,7 @@ import koboRideImage from "@/assets/images/koboRide.png";
 import { usePathname } from "next/navigation";
 import { useCallback, useMemo } from "react";
 import { motion, type Variants } from "framer-motion";
+import { useDisclosure } from "@mantine/hooks";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -235,12 +236,12 @@ export default function Header({
   logo: React.ReactNode;
 }) {
   return (
-    <div className='z-20' style={{ backgroundColor }}>
-      <div className='hidden md:block'>
+    <div className='z-20' >
+      <div className='hidden md:block' style={{ backgroundColor }}>
         <DesktopHeader textColor={textColor} logo={logo} />
       </div>
       <div className='md:hidden'>
-        <MobileHeader logo={logo} />
+        <MobileHeader logo={logo} textColor={textColor} backgroundColor={backgroundColor} />
       </div>
     </div>
   );
@@ -345,26 +346,151 @@ function DesktopHeader({
   );
 }
 
-function MobileHeader({ logo }: { logo: React.ReactNode }) {
+function MobileHeader({ logo, textColor, backgroundColor }: { logo: React.ReactNode, textColor: string, backgroundColor: string }) {
+  const [opened, { toggle }] = useDisclosure();
   return (
-    <motion.header
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35, ease: EASE }}
-      className='container mx-auto flex items-center justify-between px-4 py-5'>
-      <motion.div whileTap={{ scale: 0.98 }}>{logo}</motion.div>
+    <>
+      <motion.header
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35, ease: EASE }}
+        className='flex items-center bg-[#081515] justify-between px-4 py-5'>
+        <motion.div whileTap={{ scale: 0.98 }}>
 
-      <motion.div whileHover={{ y: -1 }} whileTap={{ scale: 0.98 }}>
-        <Button
-          variant='default'
-          style={{
-            backgroundColor: "#009A74",
-            color: "white",
-            borderColor: "#008E6A",
-          }}>
+          <Link href="/">{logo}</Link>
+
+        </motion.div>
+
+        <motion.div whileHover={{ y: -1 }} whileTap={{ scale: 0.98 }}>
+          <Burger opened={opened} variant="outline" color="white" onClick={toggle} aria-label="Toggle navigation" />
+        </motion.div>
+      </motion.header>
+
+      {opened && <MobileDrawer textColor={textColor} backgroundColor={backgroundColor} opened={opened} close={toggle} />}
+
+    </>
+  );
+}
+
+
+const mobileNavLinks = [{
+  label: "Product",
+  children: [
+    {
+      label: "Kobo Vault",
+      href: "/personal"
+    },
+    {
+
+      label: "Kobo Chat",
+      href: "#"
+    }, {
+      label: "Kobo Eat",
+      href: "#"
+    }]
+}, {
+  label: "Company",
+  children: [
+    {
+      label: "About Us",
+      href: "/company/about-us"
+    }, {
+      label: "Careers",
+      href: "/company/careers"
+    }, {
+      label: "Press",
+      href: "/company/press"
+    }
+  ]
+}, {
+  label: "Contact Us",
+  href: "/contact-us"
+}, {
+  label: "Help",
+  href: "/help"
+}]
+
+
+function MobileDrawer({ backgroundColor, textColor, opened, close }: { backgroundColor: string, textColor: string, opened: boolean, close: () => void }) {
+
+  return (
+    <Drawer styles={
+      {
+        header: {
+          backgroundColor: backgroundColor,
+        },
+        close: {
+          color: textColor
+        },
+        content: {
+          backgroundColor: backgroundColor,
+          height: "70vh",
+          borderRadius: "0 0 14px 14px"
+        }
+
+      }} opened={opened} onClose={close} overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
+      position="right">
+      <Accordion styles={{
+        content: {
+          backgroundColor: "#122A2A"
+        },
+        control: {
+          color: textColor
+        },
+        chevron: {
+          color: textColor
+        },
+        item: {
+          borderBottom: backgroundColor === "white" ? "1px solid #0000001F" : "1px solid #FFFFFF1A"
+        }
+      }}>
+        {
+          mobileNavLinks.map((item) => item.children ? (
+            <Accordion.Item key={item.label} value={item.label}>
+              <Accordion.Control>{item.label}</Accordion.Control>
+              {item.children && <Accordion.Panel>
+                <div className="flex flex-col gap-2 py-2">
+                  {
+                    item.children.map((child) => (
+                      <Link key={child.label} href={child.href}>
+                        <Button variant="subtle" color="white">{child.label}</Button>
+                      </Link>
+                    ))
+                  }
+                </div>
+              </Accordion.Panel>}
+            </Accordion.Item>
+          ) : (
+            (
+              <Accordion.Item key={item.label} value={item.label}>
+                <Link href={item.href}>
+                  <Accordion.Control styles={{
+                    chevron: {
+                      display: "none"
+                    }
+                  }}>
+                    {item.label}
+                  </Accordion.Control>
+                </Link>
+              </Accordion.Item>
+            )
+          ))
+        }
+      </Accordion>
+
+
+      <div className="mt-10">
+        <Button fullWidth variant="default" style={{
+          backgroundColor: "#009A74",
+          color: "white",
+          borderColor: "#008E6A",
+          borderRadius: "10px",
+          height: "44px"
+        }}>
           Get Started
         </Button>
-      </motion.div>
-    </motion.header>
+      </div>
+
+    </Drawer>
   );
 }
