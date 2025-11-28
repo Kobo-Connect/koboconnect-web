@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import React, { useMemo } from "react";
 import logo from "@/assets/logo.svg";
 import Image from "next/image";
+import { MobileHeader } from "../shared/header";
 
 type SanityImage = {
   asset: {
@@ -45,9 +46,19 @@ export default function Header({
       </div>
       <div className='md:hidden'>
         <MobileHeader
-          logo={sanityLogo}
-          navLinks={navLinks}
-          ctaButton={ctaButton}
+          textColor='white'
+          backgroundColor='#0000001F'
+          logo={
+            <Link href={"/personal"}>
+              <Image
+                src={logo}
+                className='z-50'
+                alt={"Logo"}
+                width={100}
+                height={100}
+              />
+            </Link>
+          }
         />
       </div>
     </div>
@@ -141,43 +152,6 @@ function DesktopHeader({ logo: sanityLogo, navLinks, ctaButton }: HeaderProps) {
             {cta.label}
           </Button>
         </Link>
-      </div>
-    </header>
-  );
-}
-
-function MobileHeader({ logo: sanityLogo, navLinks, ctaButton }: HeaderProps) {
-  // Default nav links
-  const defaultNavLinks: NavLink[] = [
-    {
-      label: "Personal",
-      href: "/personal",
-    },
-    {
-      label: "Business",
-      href: "/business",
-    },
-    {
-      label: "CRS",
-      href: "/crs",
-    },
-  ];
-
-  // Default CTA
-  const defaultCTA = {
-    label: "Get Started",
-    href: "/",
-  };
-
-  const links = navLinks && navLinks.length > 0 ? navLinks : defaultNavLinks;
-  const cta = ctaButton || defaultCTA;
-
-  return (
-    <header>
-      <div>
-        {/* Add your mobile header implementation here */}
-        {/* You can use the sanityLogo, links, and cta props */}
-        header
       </div>
     </header>
   );

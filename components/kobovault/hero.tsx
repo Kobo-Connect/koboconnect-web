@@ -32,7 +32,7 @@ export default function Hero({ data }: { data?: HeroData }) {
   const heroUrl = data?.heroImage?.asset.url;
 
   return (
-    <div className='relative h-[80dvh] mb-10'>
+    <div className='relative h-[70dvh] md:h-[80dvh] mb-10'>
       <Image
         src={bgUrl || heroBg}
         priority
@@ -41,12 +41,12 @@ export default function Hero({ data }: { data?: HeroData }) {
         className='object-cover absolute inset-0 z-0'
       />
       <div className='max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 py-4 md:py-6 px-4 relative z-10'>
-        <div className='col-span-3 max-w-xl  py-10 text-white'>
-          <div>
-            <h1 className='text-2xl md:text-5xl font-bold leading-[1.30] whitespace-pre-line tracking-wide'>
+        <div className='md:col-span-3 flex flex-col items-center md:items-start  py-10 text-white'>
+          <div className='max-w-lg mx-auto md:m-0'>
+            <h1 className='text-3xl text-center md:text-left md:text-5xl font-bold leading-[1.35] whitespace-pre-line tracking-wide'>
               {displayTitle}
             </h1>
-            <p className='my-6 text-sm md:text-lg text-[#FFFFFFB2]'>
+            <p className='my-6  text-base text-center md:text-left md:text-lg text-[#FFFFFFB2]'>
               {displayDescription}
             </p>
           </div>
@@ -97,7 +97,7 @@ export default function Hero({ data }: { data?: HeroData }) {
             )}
           </div>
         </div>
-        <div className='col-span-2  h-full pb-10'>
+        <div className='col-span-2 hidden md:block  h-full pb-10'>
           {heroUrl ? (
             <Image
               src={heroUrl}

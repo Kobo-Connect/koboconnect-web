@@ -61,7 +61,7 @@ function TotalControl({ data }: { data?: TotalControlData }) {
         ];
 
   return (
-    <div className='max-w-6xl mx-auto py-6 md:py-10 px-4 flex flex-col md:flex-row gap-8 md:gap-16 lg:gap-20 items-end'>
+    <div className='max-w-6xl mx-auto py-6 md:py-10 px-4 flex flex-col md:flex-row gap-8 md:gap-16 lg:gap-20 items-center md:items-end'>
       <div className='relative'>
         {data?.image?.asset?.url ? (
           <Image

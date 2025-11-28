@@ -346,7 +346,7 @@ function DesktopHeader({
   );
 }
 
-function MobileHeader({ logo, textColor, backgroundColor }: { logo: React.ReactNode, textColor: string, backgroundColor: string }) {
+export function MobileHeader({ logo, textColor, backgroundColor }: { logo: React.ReactNode, textColor: string, backgroundColor: string }) {
   const [opened, { toggle }] = useDisclosure();
   return (
     <>
