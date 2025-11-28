@@ -46,8 +46,8 @@ export default function Header({
       </div>
       <div className='md:hidden'>
         <MobileHeader
-          textColor='white'
-          backgroundColor='#0000001F'
+          textColor='#FFFFFF'
+          backgroundColor='#081515'
           logo={
             <Link href={"/personal"}>
               <Image

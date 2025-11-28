@@ -20,7 +20,7 @@ async function SimplifyPaymentBanner() {
 
   return (
     <div className=' py-10 md:py-14 px-4 max-w-7xl mx-auto'>
-      <div className='bg-[#0A1B1B] grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-12 rounded-2xl pt-6'>
+      <div className='bg-[#0A1B1B] grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 lg:gap-16 rounded-2xl pt-6'>
         <div className='col-span-1 relative min-h-[300px]'>
           {imageUrl ? (
             <Image

@@ -42,7 +42,7 @@ export default function Hero({ data }: { data?: HeroData }) {
       />
       <div className='max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 py-4 md:py-6 px-4 relative z-10'>
         <div className='md:col-span-3 flex flex-col items-center md:items-start  py-10 text-white'>
-          <div className='max-w-lg mx-auto md:m-0'>
+          <div className='max-w-lg md:max-w-xl mx-auto md:m-0'>
             <h1 className='text-3xl text-center md:text-left md:text-5xl font-bold leading-[1.35] whitespace-pre-line tracking-wide'>
               {displayTitle}
             </h1>
@@ -102,16 +102,16 @@ export default function Hero({ data }: { data?: HeroData }) {
             <Image
               src={heroUrl}
               alt={data?.heroImage?.alt || "hero-img"}
-              width={500}
-              height={500}
+              width={480}
+              height={480}
               priority
             />
           ) : (
             <Image
               src={heroImg}
               alt='hero-img'
-              width={500}
-              height={500}
+              width={480}
+              height={480}
               priority
             />
           )}
